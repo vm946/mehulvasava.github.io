@@ -128,6 +128,20 @@
       </div>
     </section>
   </main>
+  <div class="visitor-counter">
+    👁️ Visitors: <span id="visitorCount">Loading...</span>
+</div>
+
+<script>
+fetch("https://api.countapi.xyz/hit/mehulvasava-portfolio/visits")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("visitorCount").textContent = data.value;
+    })
+    .catch(() => {
+        document.getElementById("visitorCount").textContent = "—";
+    });
+</script>
 
   <footer><span>© 2026 Mehul Vasava</span><span>Designed & built with HTML · CSS · JS</span></footer>
   <script src="script.js"></script>
