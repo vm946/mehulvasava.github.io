@@ -133,16 +133,21 @@
 </div>
 
 <script>
-fetch("https://api.countapi.xyz/hit/mehulvasava-portfolio/visits")
-    .then(response => response.json())
+fetch("https://countapi.mileshilliard.com/api/v1/hit/mehulvasava-portfolio-visits")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch visitor count");
+        }
+        return response.json();
+    })
     .then(data => {
         document.getElementById("visitorCount").textContent = data.value;
     })
-    .catch(() => {
+    .catch(error => {
+        console.error("Visitor counter error:", error);
         document.getElementById("visitorCount").textContent = "—";
     });
 </script>
-
   <footer><span>© 2026 Mehul Vasava</span><span>Designed & built with HTML · CSS · JS</span></footer>
   <script src="script.js"></script>
 </body>
