@@ -1,15 +1,20 @@
 /* =========================================================
-   MEHUL VASAVA PORTFOLIO
-   Premium Scroll Animation System
+   MEHUL VASAVA — ADVANCED PORTFOLIO ANIMATIONS
+   Vanilla JavaScript — No external library required
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================
-     SCROLL REVEAL
-     ========================= */
+  const root = document.documentElement;
+  const body = document.body;
 
-  const revealElements = document.querySelectorAll(".reveal");
+  /* =======================================================
+     1. SCROLL REVEAL ENGINE
+     ======================================================= */
+
+  const revealItems = document.querySelectorAll(
+    ".reveal, .skill, .project, .timeline-item"
+  );
 
   const revealObserver = new IntersectionObserver(
     (entries, observer) => {
@@ -18,10 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!entry.isIntersecting) return;
 
-        entry.target.classList.add("show");
+        const element = entry.target;
 
-        observer.unobserve(entry.target);
+        element.classList.add("show");
+        element.classList.add("is-visible");
 
+        observer.unobserve(element);
       });
 
     },
@@ -31,11 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  revealElements.forEach((element, index) => {
+  revealItems.forEach((element, index) => {
 
     element.style.setProperty(
       "--reveal-delay",
-      `${(index % 5) * 100}ms`
+      `${Math.min(index % 6, 5) * 90}ms`
     );
 
     revealObserver.observe(element);
@@ -43,120 +50,64 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =========================
-     STAGGERED PROJECT / SKILL
-     ========================= */
+  /* =======================================================
+     2. STAGGER PROJECT / SKILL CARDS
+     ======================================================= */
 
-  const staggerGroups = [
-    ".skill-grid",
-    ".project-list",
-    ".timeline"
-  ];
+  document
+    .querySelectorAll(".skill-grid, .project-list, .timeline")
+    .forEach((group) => {
 
-  staggerGroups.forEach((selector) => {
+      [...group.children].forEach((child, index) => {
 
-    const parent = document.querySelector(selector);
+        child.style.setProperty(
+          "--stagger-delay",
+          `${index * 120}ms`
+        );
 
-    if (!parent) return;
-
-    const children = parent.children;
-
-    Array.from(children).forEach((child, index) => {
-
-      child.style.setProperty(
-        "--stagger-delay",
-        `${index * 130}ms`
-      );
+      });
 
     });
 
-  });
 
-
-  /* =========================
-     SMOOTH NAVIGATION
-     ========================= */
+  /* =======================================================
+     3. SMOOTH ANCHOR SCROLL
+     ======================================================= */
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
 
     link.addEventListener("click", (event) => {
 
-      const targetId = link.getAttribute("href");
+      const id = link.getAttribute("href");
 
-      if (!targetId || targetId === "#") return;
+      if (!id || id === "#") return;
 
-      const target = document.querySelector(targetId);
+      const target = document.querySelector(id);
 
       if (!target) return;
 
       event.preventDefault();
 
-      const navbarHeight = 76;
+      const navHeight = 80;
 
-      const targetPosition =
+      const position =
         target.getBoundingClientRect().top +
         window.scrollY -
-        navbarHeight;
+        navHeight;
 
       window.scrollTo({
-        top: targetPosition,
+        top: position,
         behavior: "smooth"
       });
-
-      /* Close mobile menu */
-
-      const nav = document.querySelector(".navbar nav");
-
-      if (nav) {
-        nav.classList.remove("open");
-      }
 
     });
 
   });
 
 
-  /* =========================
-     ACTIVE NAVIGATION
-     ========================= */
-
-  const sections = document.querySelectorAll("main section[id]");
-  const navLinks = document.querySelectorAll(".navbar nav a");
-
-  const activeSectionObserver = new IntersectionObserver(
-    (entries) => {
-
-      entries.forEach((entry) => {
-
-        if (!entry.isIntersecting) return;
-
-        const currentId = entry.target.id;
-
-        navLinks.forEach((link) => {
-
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${currentId}`
-          );
-
-        });
-
-      });
-
-    },
-    {
-      threshold: 0.35
-    }
-  );
-
-  sections.forEach((section) => {
-    activeSectionObserver.observe(section);
-  });
-
-
-  /* =========================
-     SCROLL PROGRESS BAR
-     ========================= */
+  /* =======================================================
+     4. SCROLL PROGRESS
+     ======================================================= */
 
   const progress = document.querySelector(".progress");
 
@@ -166,13 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const scrollTop = window.scrollY;
 
-    const documentHeight =
+    const scrollHeight =
       document.documentElement.scrollHeight -
       window.innerHeight;
 
     const percentage =
-      documentHeight > 0
-        ? (scrollTop / documentHeight) * 100
+      scrollHeight > 0
+        ? (scrollTop / scrollHeight) * 100
         : 0;
 
     progress.style.width = `${percentage}%`;
@@ -188,76 +139,323 @@ document.addEventListener("DOMContentLoaded", () => {
   updateProgress();
 
 
-  /* =========================
-     MOBILE MENU
-     ========================= */
+  /* =======================================================
+     5. SMART NAVBAR
+     ======================================================= */
 
-  const menuButton = document.querySelector(".menu-btn");
-  const nav = document.querySelector(".navbar nav");
+  const navbar =
+    document.querySelector(".navbar") ||
+    document.querySelector("header");
 
-  if (menuButton && nav) {
+  let lastScroll = window.scrollY;
 
-    menuButton.addEventListener("click", () => {
+  function navbarScroll() {
 
-      nav.classList.toggle("open");
+    const currentScroll = window.scrollY;
 
-      menuButton.classList.toggle("active");
+    if (!navbar) return;
 
-    });
+    if (currentScroll > 60) {
+      navbar.classList.add("nav-scrolled");
+    } else {
+      navbar.classList.remove("nav-scrolled");
+    }
+
+    if (currentScroll > lastScroll && currentScroll > 180) {
+      navbar.classList.add("nav-hidden");
+    } else {
+      navbar.classList.remove("nav-hidden");
+    }
+
+    lastScroll = currentScroll;
 
   }
 
-
-  /* =========================
-     SKILL METER ANIMATION
-     ========================= */
-
-  const meters = document.querySelectorAll(".meter i");
-
-  const meterObserver = new IntersectionObserver(
-    (entries, observer) => {
-
-      entries.forEach((entry) => {
-
-        if (!entry.isIntersecting) return;
-
-        const meter = entry.target;
-
-        const width = meter.style.getPropertyValue("--w");
-
-        meter.style.setProperty("--target-width", width);
-
-        meter.classList.add("meter-active");
-
-        observer.unobserve(meter);
-
-      });
-
-    },
-    {
-      threshold: 0.5
-    }
+  window.addEventListener(
+    "scroll",
+    navbarScroll,
+    { passive: true }
   );
+
+
+  /* =======================================================
+     6. ACTIVE SECTION NAVIGATION
+     ======================================================= */
+
+  const sections =
+    document.querySelectorAll("main section[id]");
+
+  const navLinks =
+    document.querySelectorAll(
+      '.navbar a[href^="#"], nav a[href^="#"]'
+    );
+
+  const sectionObserver =
+    new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (!entry.isIntersecting) return;
+
+          const id = entry.target.id;
+
+          navLinks.forEach((link) => {
+
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${id}`
+            );
+
+          });
+
+        });
+
+      },
+      {
+        threshold: 0.35
+      }
+    );
+
+  sections.forEach((section) => {
+    sectionObserver.observe(section);
+  });
+
+
+  /* =======================================================
+     7. SKILL BAR ANIMATION
+     ======================================================= */
+
+  const meters =
+    document.querySelectorAll(".meter i");
+
+  const meterObserver =
+    new IntersectionObserver(
+      (entries, observer) => {
+
+        entries.forEach((entry) => {
+
+          if (!entry.isIntersecting) return;
+
+          const meter = entry.target;
+
+          const target =
+            meter.style.getPropertyValue("--w") ||
+            meter.getAttribute("data-width");
+
+          if (target) {
+            meter.style.setProperty(
+              "--target-width",
+              target
+            );
+          }
+
+          meter.classList.add("meter-active");
+
+          observer.unobserve(meter);
+
+        });
+
+      },
+      {
+        threshold: 0.5
+      }
+    );
 
   meters.forEach((meter) => {
     meterObserver.observe(meter);
   });
 
 
-  /* =========================
-     CURSOR GLOW
-     ========================= */
+  /* =======================================================
+     8. ANIMATED NUMBER COUNTERS
+     ======================================================= */
 
-  const cursorGlow = document.querySelector(".cursor-glow");
+  const counters =
+    document.querySelectorAll(
+      "[data-counter], .counter"
+    );
 
-  if (cursorGlow && window.matchMedia("(pointer: fine)").matches) {
+  function animateCounter(element) {
+
+    const target =
+      parseFloat(
+        element.dataset.counter ||
+        element.dataset.target ||
+        element.textContent
+      );
+
+    if (isNaN(target)) return;
+
+    const duration = 1500;
+    const start = performance.now();
+
+    function update(time) {
+
+      const progress =
+        Math.min((time - start) / duration, 1);
+
+      const eased =
+        1 - Math.pow(1 - progress, 3);
+
+      const value =
+        target * eased;
+
+      element.textContent =
+        Number.isInteger(target)
+          ? Math.round(value)
+          : value.toFixed(1);
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+
+    }
+
+    requestAnimationFrame(update);
+
+  }
+
+  const counterObserver =
+    new IntersectionObserver(
+      (entries, observer) => {
+
+        entries.forEach((entry) => {
+
+          if (!entry.isIntersecting) return;
+
+          animateCounter(entry.target);
+
+          observer.unobserve(entry.target);
+
+        });
+
+      },
+      {
+        threshold: 0.7
+      }
+    );
+
+  counters.forEach((counter) => {
+    counterObserver.observe(counter);
+  });
+
+
+  /* =======================================================
+     9. 3D PROJECT CARD TILT
+     ======================================================= */
+
+  const cards =
+    document.querySelectorAll(
+      ".project, .skill, .about-card"
+    );
+
+  if (
+    window.matchMedia("(pointer: fine)").matches
+  ) {
+
+    cards.forEach((card) => {
+
+      card.addEventListener("mousemove", (event) => {
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        const centerX =
+          rect.width / 2;
+
+        const centerY =
+          rect.height / 2;
+
+        const rotateX =
+          ((y - centerY) / centerY) * -5;
+
+        const rotateY =
+          ((x - centerX) / centerX) * 5;
+
+        card.style.setProperty(
+          "--rotate-x",
+          `${rotateX}deg`
+        );
+
+        card.style.setProperty(
+          "--rotate-y",
+          `${rotateY}deg`
+        );
+
+        card.classList.add("tilting");
+
+      });
+
+      card.addEventListener("mouseleave", () => {
+
+        card.style.setProperty(
+          "--rotate-x",
+          "0deg"
+        );
+
+        card.style.setProperty(
+          "--rotate-y",
+          "0deg"
+        );
+
+        card.classList.remove("tilting");
+
+      });
+
+    });
+
+  }
+
+
+  /* =======================================================
+     10. MOUSE FOLLOW SPOTLIGHT
+     ======================================================= */
+
+  let spotlight =
+    document.querySelector(".cursor-glow");
+
+  if (!spotlight) {
+
+    spotlight =
+      document.createElement("div");
+
+    spotlight.className =
+      "cursor-glow";
+
+    body.appendChild(spotlight);
+
+  }
+
+  if (
+    window.matchMedia("(pointer: fine)").matches
+  ) {
 
     window.addEventListener(
       "mousemove",
       (event) => {
 
-        cursorGlow.style.left = `${event.clientX}px`;
-        cursorGlow.style.top = `${event.clientY}px`;
+        root.style.setProperty(
+          "--mouse-x",
+          `${event.clientX}px`
+        );
+
+        root.style.setProperty(
+          "--mouse-y",
+          `${event.clientY}px`
+        );
+
+        spotlight.style.left =
+          `${event.clientX}px`;
+
+        spotlight.style.top =
+          `${event.clientY}px`;
 
       },
       { passive: true }
@@ -266,32 +464,44 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
-     PARALLAX HERO
-     ========================= */
+  /* =======================================================
+     11. HERO PARALLAX
+     ======================================================= */
 
-  const heroOrbit = document.querySelector(".hero-orbit");
-  const heroGrid = document.querySelector(".hero-grid");
+  const hero =
+    document.querySelector(
+      ".hero, #home"
+    );
 
-  if (heroOrbit && window.matchMedia("(pointer: fine)").matches) {
+  const heroElements =
+    document.querySelectorAll(
+      ".hero-orbit, .hero-grid, .hero-glow, .hero-image"
+    );
+
+  if (hero && heroElements.length) {
 
     window.addEventListener(
       "scroll",
       () => {
 
-        const scrollY = window.scrollY;
+        const scroll =
+          window.scrollY;
 
-        if (scrollY < window.innerHeight) {
+        if (
+          scroll > window.innerHeight * 1.2
+        ) return;
 
-          heroOrbit.style.transform =
-            `translateY(${scrollY * 0.08}px)`;
+        heroElements.forEach(
+          (element, index) => {
 
-          if (heroGrid) {
-            heroGrid.style.transform =
-              `translateY(${scrollY * 0.03}px)`;
+            const speed =
+              0.02 + index * 0.025;
+
+            element.style.transform =
+              `translate3d(0, ${scroll * speed}px, 0)`;
+
           }
-
-        }
+        );
 
       },
       { passive: true }
@@ -300,16 +510,239 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
-     REDUCED MOTION SUPPORT
-     ========================= */
+  /* =======================================================
+     12. SECTION PARALLAX
+     ======================================================= */
+
+  const parallaxElements =
+    document.querySelectorAll(
+      "[data-parallax]"
+    );
+
+  function updateParallax() {
+
+    const viewport =
+      window.innerHeight;
+
+    parallaxElements.forEach((element) => {
+
+      const rect =
+        element.getBoundingClientRect();
+
+      if (
+        rect.bottom < 0 ||
+        rect.top > viewport
+      ) return;
+
+      const speed =
+        parseFloat(
+          element.dataset.parallax
+        ) || 0.15;
+
+      const center =
+        rect.top + rect.height / 2;
+
+      const offset =
+        (viewport / 2 - center) * speed;
+
+      element.style.transform =
+        `translate3d(0, ${offset}px, 0)`;
+
+    });
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    updateParallax,
+    { passive: true }
+  );
+
+
+  /* =======================================================
+     13. TIMELINE SCROLL PROGRESS
+     ======================================================= */
+
+  const timeline =
+    document.querySelector(".timeline");
+
+  if (timeline) {
+
+    function updateTimeline() {
+
+      const rect =
+        timeline.getBoundingClientRect();
+
+      const viewport =
+        window.innerHeight;
+
+      const progress =
+        Math.min(
+          Math.max(
+            (viewport - rect.top) /
+            (viewport + rect.height),
+            0
+          ),
+          1
+        );
+
+      timeline.style.setProperty(
+        "--timeline-progress",
+        `${progress * 100}%`
+      );
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateTimeline,
+      { passive: true }
+    );
+
+    updateTimeline();
+
+  }
+
+
+  /* =======================================================
+     14. SCROLL VELOCITY
+     ======================================================= */
+
+  let previousScroll =
+    window.scrollY;
+
+  let velocity = 0;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      const current =
+        window.scrollY;
+
+      velocity =
+        current - previousScroll;
+
+      previousScroll =
+        current;
+
+      root.style.setProperty(
+        "--scroll-velocity",
+        Math.min(
+          Math.abs(velocity),
+          15
+        )
+      );
+
+    },
+    { passive: true }
+  );
+
+
+  /* =======================================================
+     15. IMAGE REVEAL
+     ======================================================= */
+
+  const images =
+    document.querySelectorAll(
+      "img"
+    );
+
+  const imageObserver =
+    new IntersectionObserver(
+      (entries, observer) => {
+
+        entries.forEach((entry) => {
+
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add(
+            "image-loaded"
+          );
+
+          observer.unobserve(
+            entry.target
+          );
+
+        });
+
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+  images.forEach((image) => {
+    imageObserver.observe(image);
+  });
+
+
+  /* =======================================================
+     16. MOBILE MENU
+     ======================================================= */
+
+  const menuButton =
+    document.querySelector(
+      ".menu-btn"
+    );
+
+  const nav =
+    document.querySelector(
+      ".navbar nav"
+    );
+
+  if (menuButton && nav) {
+
+    menuButton.addEventListener(
+      "click",
+      () => {
+
+        nav.classList.toggle(
+          "open"
+        );
+
+        menuButton.classList.toggle(
+          "active"
+        );
+
+      }
+    );
+
+    nav.querySelectorAll("a")
+      .forEach((link) => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            nav.classList.remove(
+              "open"
+            );
+
+            menuButton.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+      });
+
+  }
+
+
+  /* =======================================================
+     17. REDUCED MOTION
+     ======================================================= */
 
   const reducedMotion =
-    window.matchMedia("(prefers-reduced-motion: reduce)");
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
 
   if (reducedMotion.matches) {
 
-    document.documentElement.classList.add(
+    root.classList.add(
       "reduce-motion"
     );
 
