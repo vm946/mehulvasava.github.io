@@ -1041,3 +1041,856 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+/* =========================================================
+   CINEMATIC AI / ML NEURAL NETWORK
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const canvas =
+        document.getElementById("neuralCanvas");
+
+    const scene =
+        document.querySelector(".ai-scene");
+
+    const hero =
+        document.querySelector(".hero");
+
+    const cursor =
+        document.getElementById("cursorTrail");
+
+
+    if (!canvas || !scene || !hero) {
+        return;
+    }
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    let width = 0;
+    let height = 0;
+
+    let nodes = [];
+
+    let mouse = {
+        x: 0,
+        y: 0,
+        active: false
+    };
+
+
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+
+    let rotationX = 0;
+    let rotationY = 0;
+
+
+    /* =====================================================
+       CONFIG
+       ===================================================== */
+
+    const isMobile =
+        window.innerWidth < 700;
+
+    const NODE_COUNT =
+        isMobile ? 28 : 48;
+
+    const CONNECTION_DISTANCE =
+        isMobile ? 110 : 145;
+
+
+    /* =====================================================
+       RESIZE
+       ===================================================== */
+
+    function resizeCanvas() {
+
+        const rect =
+            scene.getBoundingClientRect();
+
+        const dpr =
+            Math.min(
+                window.devicePixelRatio || 1,
+                2
+            );
+
+        width = rect.width;
+        height = rect.height;
+
+        canvas.width =
+            width * dpr;
+
+        canvas.height =
+            height * dpr;
+
+        canvas.style.width =
+            `${width}px`;
+
+        canvas.style.height =
+            `${height}px`;
+
+        ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+        );
+    }
+
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas,
+        { passive: true }
+    );
+
+
+    resizeCanvas();
+
+
+    /* =====================================================
+       CREATE 3D NODES
+       ===================================================== */
+
+    function createNodes() {
+
+        nodes = [];
+
+        for (
+            let i = 0;
+            i < NODE_COUNT;
+            i++
+        ) {
+
+            const theta =
+                Math.random() *
+                Math.PI *
+                2;
+
+            const phi =
+                Math.acos(
+                    2 * Math.random() - 1
+                );
+
+            const radius =
+                .28 +
+                Math.random() * .65;
+
+
+            nodes.push({
+
+                theta,
+
+                phi,
+
+                radius,
+
+                size:
+                    1.2 +
+                    Math.random() * 2.3,
+
+                pulse:
+                    Math.random() *
+                    Math.PI * 2,
+
+                speed:
+                    .005 +
+                    Math.random() * .01
+
+            });
+        }
+    }
+
+
+    createNodes();
+
+
+    /* =====================================================
+       PROJECT 3D SPHERE
+       ===================================================== */
+
+    function projectNode(node) {
+
+        let x =
+            Math.sin(node.phi) *
+            Math.cos(node.theta) *
+            node.radius;
+
+        let y =
+            Math.cos(node.phi) *
+            node.radius;
+
+        let z =
+            Math.sin(node.phi) *
+            Math.sin(node.theta) *
+            node.radius;
+
+
+        /* Mouse rotation */
+
+        const cosY =
+            Math.cos(rotationY);
+
+        const sinY =
+            Math.sin(rotationY);
+
+
+        const rotatedX =
+            x * cosY -
+            z * sinY;
+
+
+        const rotatedZ =
+            x * sinY +
+            z * cosY;
+
+
+        const cosX =
+            Math.cos(rotationX);
+
+        const sinX =
+            Math.sin(rotationX);
+
+
+        const rotatedY =
+            y * cosX -
+            rotatedZ * sinX;
+
+
+        const finalZ =
+            y * sinX +
+            rotatedZ * cosX;
+
+
+        const scale =
+            1 /
+            (1 + finalZ * .55);
+
+
+        return {
+
+            x:
+                width / 2 +
+                rotatedX *
+                width *
+                .48 *
+                scale,
+
+            y:
+                height / 2 +
+                rotatedY *
+                height *
+                .48 *
+                scale,
+
+            z:
+                finalZ,
+
+            scale
+
+        };
+    }
+
+
+    /* =====================================================
+       DRAW
+       ===================================================== */
+
+    function drawNetwork(time) {
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        const projected =
+            nodes.map(
+                projectNode
+            );
+
+
+        /* =================================================
+           CONNECTIONS
+           ================================================= */
+
+        for (
+            let i = 0;
+            i < projected.length;
+            i++
+        ) {
+
+            for (
+                let j = i + 1;
+                j < projected.length;
+                j++
+            ) {
+
+                const a =
+                    projected[i];
+
+                const b =
+                    projected[j];
+
+
+                const dx =
+                    a.x - b.x;
+
+                const dy =
+                    a.y - b.y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance >
+                    CONNECTION_DISTANCE
+                ) {
+                    continue;
+                }
+
+
+                const depth =
+                    Math.max(
+                        0,
+                        (a.z + b.z + 2) / 4
+                    );
+
+
+                const alpha =
+                    (
+                        1 -
+                        distance /
+                        CONNECTION_DISTANCE
+                    ) *
+                    depth *
+                    .65;
+
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    a.x,
+                    a.y
+                );
+
+                ctx.lineTo(
+                    b.x,
+                    b.y
+                );
+
+
+                ctx.strokeStyle =
+                    `rgba(123,105,255,${alpha})`;
+
+                ctx.lineWidth =
+                    .6 +
+                    depth * .7;
+
+                ctx.stroke();
+
+
+                /* =========================================
+                   DATA PACKET
+                   ========================================= */
+
+                if (
+                    (i + j) % 7 === 0
+                ) {
+
+                    const progress =
+                        (
+                            time * .0003 +
+                            i * .17 +
+                            j * .11
+                        ) % 1;
+
+
+                    const px =
+                        a.x +
+                        (b.x - a.x) *
+                        progress;
+
+
+                    const py =
+                        a.y +
+                        (b.y - a.y) *
+                        progress;
+
+
+                    ctx.beginPath();
+
+                    ctx.arc(
+                        px,
+                        py,
+                        1.5,
+                        0,
+                        Math.PI * 2
+                    );
+
+
+                    ctx.fillStyle =
+                        `rgba(255,255,255,${alpha + .25})`;
+
+                    ctx.shadowBlur = 10;
+
+                    ctx.shadowColor =
+                        "rgba(120,100,255,.9)";
+
+                    ctx.fill();
+
+                    ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+
+        /* =================================================
+           NODES
+           ================================================= */
+
+        projected.forEach(
+            (point, index) => {
+
+                const original =
+                    nodes[index];
+
+
+                const pulse =
+                    Math.sin(
+                        time * .002 +
+                        original.pulse
+                    );
+
+
+                const size =
+                    original.size *
+                    point.scale *
+                    (1 + pulse * .25);
+
+
+                const alpha =
+                    .25 +
+                    point.scale *
+                    .75;
+
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    point.x,
+                    point.y,
+                    size,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fillStyle =
+                    `rgba(225,220,255,${alpha})`;
+
+
+                ctx.shadowBlur =
+                    12;
+
+
+                ctx.shadowColor =
+                    "rgba(110,90,255,.9)";
+
+
+                ctx.fill();
+
+
+                ctx.shadowBlur = 0;
+            }
+        );
+
+
+        /* =================================================
+           CENTRAL ENERGY
+           ================================================= */
+
+        const gradient =
+            ctx.createRadialGradient(
+                width / 2,
+                height / 2,
+                0,
+                width / 2,
+                height / 2,
+                width * .28
+            );
+
+
+        gradient.addColorStop(
+            0,
+            "rgba(120,100,255,.18)"
+        );
+
+        gradient.addColorStop(
+            .5,
+            "rgba(80,100,255,.06)"
+        );
+
+        gradient.addColorStop(
+            1,
+            "rgba(0,0,0,0)"
+        );
+
+
+        ctx.fillStyle =
+            gradient;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            width / 2,
+            height / 2,
+            width * .28,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    }
+
+
+    /* =====================================================
+       ANIMATION LOOP
+       ===================================================== */
+
+    let animationFrame;
+
+
+    function animate(time) {
+
+        rotationX +=
+            (targetRotationX -
+             rotationX) *
+            .035;
+
+
+        rotationY +=
+            (targetRotationY -
+             rotationY) *
+            .035;
+
+
+        /* Automatic slow rotation */
+
+        targetRotationY += .0008;
+
+
+        drawNetwork(time);
+
+
+        animationFrame =
+            requestAnimationFrame(
+                animate
+            );
+    }
+
+
+    animate(0);
+
+
+    /* =====================================================
+       MOUSE INTERACTION
+       ===================================================== */
+
+    hero.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                hero.getBoundingClientRect();
+
+
+            const x =
+                (
+                    event.clientX -
+                    rect.left
+                ) /
+                rect.width -
+                .5;
+
+
+            const y =
+                (
+                    event.clientY -
+                    rect.top
+                ) /
+                rect.height -
+                .5;
+
+
+            mouse.x = x;
+            mouse.y = y;
+            mouse.active = true;
+
+
+            targetRotationY =
+                x * .75;
+
+
+            targetRotationX =
+                y * .55;
+
+
+            /* Move AI scene */
+
+            scene.style.transform =
+                `
+                translateY(-50%)
+                translate(
+                    ${x * -18}px,
+                    ${y * -12}px
+                )
+                rotateX(${y * -3}deg)
+                rotateY(${x * 5}deg)
+                `;
+        },
+        { passive: true }
+    );
+
+
+    hero.addEventListener(
+        "mouseleave",
+        () => {
+
+            mouse.active = false;
+
+            targetRotationX = 0;
+            targetRotationY = 0;
+
+            scene.style.transform =
+                "translateY(-50%)";
+        }
+    );
+
+
+    /* =====================================================
+       GLOWING CURSOR
+       ===================================================== */
+
+    if (
+        cursor &&
+        window.matchMedia(
+            "(pointer:fine)"
+        ).matches
+    ) {
+
+        let cursorX = 0;
+        let cursorY = 0;
+
+        let currentCursorX = 0;
+        let currentCursorY = 0;
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                cursorX =
+                    event.clientX;
+
+                cursorY =
+                    event.clientY;
+
+                document.body.classList
+                    .add("cursor-active");
+            },
+            { passive: true }
+        );
+
+
+        function animateCursor() {
+
+            currentCursorX +=
+                (
+                    cursorX -
+                    currentCursorX
+                ) * .18;
+
+
+            currentCursorY +=
+                (
+                    cursorY -
+                    currentCursorY
+                ) * .18;
+
+
+            cursor.style.left =
+                `${currentCursorX}px`;
+
+
+            cursor.style.top =
+                `${currentCursorY}px`;
+
+
+            requestAnimationFrame(
+                animateCursor
+            );
+        }
+
+
+        animateCursor();
+    }
+
+
+    /* =====================================================
+       INTERACTIVE PARTICLE PUSH
+       ===================================================== */
+
+    const particles =
+        document.querySelectorAll(
+            ".hero-particle"
+        );
+
+
+    hero.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                hero.getBoundingClientRect();
+
+
+            const mouseX =
+                event.clientX -
+                rect.left;
+
+
+            const mouseY =
+                event.clientY -
+                rect.top;
+
+
+            particles.forEach(
+                particle => {
+
+                    const pRect =
+                        particle.getBoundingClientRect();
+
+
+                    const px =
+                        pRect.left -
+                        rect.left +
+                        pRect.width / 2;
+
+
+                    const py =
+                        pRect.top -
+                        rect.top +
+                        pRect.height / 2;
+
+
+                    const dx =
+                        px - mouseX;
+
+
+                    const dy =
+                        py - mouseY;
+
+
+                    const distance =
+                        Math.sqrt(
+                            dx * dx +
+                            dy * dy
+                        );
+
+
+                    if (
+                        distance < 140
+                    ) {
+
+                        const force =
+                            (
+                                140 -
+                                distance
+                            ) / 140;
+
+
+                        const moveX =
+                            (
+                                dx /
+                                Math.max(distance, 1)
+                            ) *
+                            force *
+                            35;
+
+
+                        const moveY =
+                            (
+                                dy /
+                                Math.max(distance, 1)
+                            ) *
+                            force *
+                            35;
+
+
+                        particle.style.transform =
+                            `
+                            translate(
+                                ${moveX}px,
+                                ${moveY}px
+                            )
+                            scale(
+                                ${1 + force}
+                            )
+                            `;
+
+                    } else {
+
+                        particle.style.transform =
+                            "";
+                    }
+                }
+            );
+        },
+        { passive: true }
+    );
+
+
+    /* =====================================================
+       CLEANUP FOR REDUCED MOTION
+       ===================================================== */
+
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+
+    if (
+        reducedMotion.matches
+    ) {
+
+        cancelAnimationFrame(
+            animationFrame
+        );
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+        scene.style.transform =
+            "translateY(-50%)";
+    }
+
+});
