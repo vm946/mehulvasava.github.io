@@ -77,3 +77,370 @@
   }
 
 }
+/* =========================================================
+   PREMIUM SCROLL ANIMATION SYSTEM
+   ========================================================= */
+
+
+/* =========================
+   BASE REVEAL
+   ========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 55px, 0);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================
+   SECTION HEADINGS
+   ========================= */
+
+.section-head.reveal {
+  transform: translate3d(0, 70px, 0);
+}
+
+.section-head.reveal.show {
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================
+   ABOUT ANIMATION
+   ========================= */
+
+.about-copy.reveal {
+  transform: translate3d(-55px, 0, 0);
+}
+
+.about-copy.reveal.show {
+  transform: translate3d(0, 0, 0);
+}
+
+.about-card.reveal {
+  transform: translate3d(55px, 0, 0) scale(0.96);
+}
+
+.about-card.reveal.show {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+
+/* =========================
+   SKILL CARDS
+   ========================= */
+
+.skill.reveal {
+  transform: translate3d(0, 45px, 0) scale(0.96);
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.skill.reveal.show {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.skill {
+  transition:
+    transform 0.5s ease,
+    background 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.skill:hover {
+  transform: translateY(-8px);
+}
+
+
+/* =========================
+   TECH CLOUD
+   ========================= */
+
+.tech-cloud.reveal {
+  transform: translate3d(0, 30px, 0);
+}
+
+.tech-cloud.reveal.show {
+  transform: translate3d(0, 0, 0);
+}
+
+.tech-cloud span {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.tech-cloud span:hover {
+  transform: translateY(-4px);
+  color: #fff;
+  border-color: #7b61ff;
+}
+
+
+/* =========================
+   PROJECT CARDS
+   ========================= */
+
+.project.reveal {
+  transform: translate3d(60px, 0, 0);
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.project.reveal.show {
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================
+   PROJECT NUMBER
+   ========================= */
+
+.project-no {
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease;
+}
+
+.project:hover .project-no {
+  transform: translateX(6px);
+  color: #7b61ff;
+}
+
+
+/* =========================
+   PROJECT ARROW
+   ========================= */
+
+.project .arrow {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.project:hover .arrow {
+  transform: translate3d(8px, -8px, 0) scale(1.1);
+}
+
+
+/* =========================
+   CHIPS
+   ========================= */
+
+.chips span {
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.chips span:hover {
+  transform: translateY(-3px);
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+
+/* =========================
+   TIMELINE
+   ========================= */
+
+.timeline-item.reveal {
+  transform: translate3d(-45px, 0, 0);
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.timeline-item.reveal.show {
+  transform: translate3d(0, 0, 0);
+}
+
+.timeline-item {
+  transition:
+    padding-left 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.timeline-item:hover {
+  padding-left: 12px;
+}
+
+
+/* =========================
+   CONTACT
+   ========================= */
+
+.contact-box.reveal {
+  transform: translate3d(0, 60px, 0) scale(0.97);
+}
+
+.contact-box.reveal.show {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+
+/* =========================
+   SOCIAL ICON ANIMATION
+   ========================= */
+
+.social-icons a {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-8px) scale(1.08);
+}
+
+
+/* =========================
+   SKILL METER
+   ========================= */
+
+.meter {
+  overflow: hidden;
+}
+
+.meter i {
+  width: 0 !important;
+  transition:
+    width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.meter i.meter-active {
+  width: var(--target-width) !important;
+}
+
+
+/* =========================
+   NAVBAR SCROLL EFFECT
+   ========================= */
+
+.navbar {
+  transition:
+    height 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================
+   SCROLL PROGRESS
+   ========================= */
+
+.progress {
+  transition: width 0.08s linear;
+  box-shadow: 0 0 12px rgba(123, 97, 255, 0.5);
+}
+
+
+/* =========================
+   HERO ORBIT
+   ========================= */
+
+.hero-orbit {
+  transition:
+    transform 0.15s linear;
+}
+
+
+/* =========================
+   SCROLL CUE
+   ========================= */
+
+.scroll-cue {
+  animation: scrollCue 2s ease-in-out infinite;
+}
+
+@keyframes scrollCue {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .reveal {
+    transform: translate3d(0, 35px, 0);
+    transition-duration: 0.7s;
+  }
+
+  .about-copy.reveal {
+    transform: translate3d(0, 35px, 0);
+  }
+
+  .about-card.reveal {
+    transform: translate3d(0, 35px, 0) scale(0.97);
+  }
+
+  .project.reveal {
+    transform: translate3d(0, 35px, 0);
+  }
+
+  .timeline-item.reveal {
+    transform: translate3d(0, 35px, 0);
+  }
+
+  .skill.reveal {
+    transform: translate3d(0, 30px, 0) scale(0.98);
+  }
+
+}
+
+
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .about-copy.reveal,
+  .about-card.reveal,
+  .project.reveal,
+  .timeline-item.reveal,
+  .skill.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+}
