@@ -3,7 +3,9 @@
 <html lang="en">
 
 <head>
-  <!-- Google Analytics -->
+
+  <!-- ================= GOOGLE ANALYTICS ================= -->
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NW7KQBQSBW"></script>
 
   <script>
@@ -17,77 +19,125 @@
     gtag('config', 'G-NW7KQBQSBW');
   </script>
 
+  <!-- ================= META ================= -->
+
   <meta charset="UTF-8">
 
-<meta name="viewport"
-     content="width=device-width, initial-scale=1.0">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-<meta name="description"
-     content="Mehul Vasava — BSc IT student, Machine Learning and Full Stack Developer portfolio.">
+>
 
-<meta name="author"
-     content="Mehul Vasava">
+<meta
+name="description"
+content="Mehul Vasava — BSc IT student, Machine Learning and Full Stack Developer portfolio."
 
-<meta name="theme-color"
-     content="#0b0b0f">
+>
 
-  <title>Mehul Vasava | BSc IT • AI/ML • Full Stack</title>
+<meta
+name="author"
+content="Mehul Vasava"
 
-  <!-- Google Fonts -->
+>
 
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
+<meta
+name="theme-color"
+content="#0b0b0f"
 
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+>
+
+  <title>
+    Mehul Vasava | Portfolio
+  </title>
+
+  <!-- ================= GOOGLE FONTS ================= -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet">
+    rel="stylesheet"
+  >
 
-  <!-- Font Awesome -->
+  <!-- ================= FONT AWESOME ================= -->
 
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 
-  <!-- Main CSS -->
+  <!-- ================= YOUR CSS ================= -->
 
-  <link rel="stylesheet"
-        href="style.css">
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
 </head>
 
 <body>
 
-  <!-- ================= GLOBAL EFFECTS ================= -->
+  <!-- =====================================================
+       GLOBAL EFFECTS
+       ===================================================== -->
 
   <div class="cursor-glow"></div>
 
   <div class="progress"></div>
 
-  <!-- ================= NAVBAR ================= -->
+  <!-- =====================================================
+       CINEMATIC CURSOR
+       ===================================================== -->
+
+  <div
+    id="cursorTrail"
+    aria-hidden="true">
+  </div>
+
+  <!-- =====================================================
+       NAVBAR
+       ===================================================== -->
 
   <header class="navbar">
 
 ```
-<a class="logo"
-   href="#home"
-   aria-label="Mehul Vasava Home">
+<a
+  class="logo"
+  href="#home"
+  aria-label="Mehul Vasava Home"
+>
 
-  <span>MV</span><i>.</i>
+  <span>
+    MV
+  </span>
+
+  <i>
+    .
+  </i>
 
 </a>
 
 
 <button
   class="menu-btn"
-  aria-label="Toggle navigation menu"
-  aria-expanded="false">
+  aria-label="Toggle menu"
+  aria-expanded="false"
+>
 
   <span></span>
+
   <span></span>
+
   <span></span>
 
 </button>
@@ -95,11 +145,11 @@
 
 <nav>
 
-  <a href="#home"
-     class="active">
-
+  <a
+    href="#home"
+    class="active"
+  >
     Home
-
   </a>
 
   <a href="#about">
@@ -127,25 +177,30 @@
 
   </header>
 
-  <!-- ================= MAIN ================= -->
+  <!-- =====================================================
+       MAIN
+       ===================================================== -->
 
   <main>
 
 ```
-<!-- =====================================================
+<!-- ===================================================
      HOME / HERO
-     ===================================================== -->
+     =================================================== -->
 
-<section id="home"
-         class="hero">
+<section
+  id="home"
+  class="hero"
+>
 
 
-  <!-- Original animated grid -->
+  <!-- Existing grid -->
+
   <div class="hero-grid"></div>
 
 
   <!-- =================================================
-       NEW LIVE HERO ANIMATION
+       LIVE PARTICLES
        ================================================= -->
 
   <div
@@ -154,17 +209,127 @@
   </div>
 
 
+  <!-- =================================================
+       CINEMATIC AI / ML SCENE
+       ================================================= -->
+
+  <div
+    class="ai-scene"
+    aria-hidden="true"
+  >
+
+
+    <!-- Neural Network Canvas -->
+
+    <canvas
+      id="neuralCanvas">
+    </canvas>
+
+
+    <!-- AI SPHERE -->
+
+    <div class="ai-sphere">
+
+
+      <!-- Rotating rings -->
+
+      <div
+        class="sphere-ring sphere-ring-1">
+      </div>
+
+      <div
+        class="sphere-ring sphere-ring-2">
+      </div>
+
+      <div
+        class="sphere-ring sphere-ring-3">
+      </div>
+
+
+      <!-- Sphere core -->
+
+      <div class="sphere-core">
+
+        <span>
+          AI
+        </span>
+
+        <small>
+          ML
+        </small>
+
+      </div>
+
+
+      <!-- Neural nodes -->
+
+      <div class="ai-node node-1"></div>
+
+      <div class="ai-node node-2"></div>
+
+      <div class="ai-node node-3"></div>
+
+      <div class="ai-node node-4"></div>
+
+      <div class="ai-node node-5"></div>
+
+      <div class="ai-node node-6"></div>
+
+      <div class="ai-node node-7"></div>
+
+      <div class="ai-node node-8"></div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         DATA LABELS
+         ================================================= -->
+
+    <div class="data-label label-1">
+
+      <span></span>
+
+      NEURAL NETWORK
+
+    </div>
+
+
+    <div class="data-label label-2">
+
+      <span></span>
+
+      MACHINE LEARNING
+
+    </div>
+
+
+    <div class="data-label label-3">
+
+      <span></span>
+
+      PREDICTION
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       AMBIENT GLOW
+       ================================================= -->
+
   <div
     class="hero-glow hero-glow-1"
     aria-hidden="true">
   </div>
 
-
   <div
     class="hero-glow hero-glow-2"
     aria-hidden="true">
   </div>
-
 
   <div
     class="hero-glow hero-glow-3"
@@ -172,23 +337,29 @@
   </div>
 
 
+  <!-- =================================================
+       ROTATING BACKGROUND RINGS
+       ================================================= -->
+
   <div
     class="hero-ring ring-1"
     aria-hidden="true">
   </div>
-
 
   <div
     class="hero-ring ring-2"
     aria-hidden="true">
   </div>
 
-
   <div
     class="hero-ring ring-3"
     aria-hidden="true">
   </div>
 
+
+  <!-- =================================================
+       SCAN LINE
+       ================================================= -->
 
   <div
     class="hero-scanline"
@@ -210,37 +381,53 @@
     </p>
 
 
-    <!-- Animated Hero Heading -->
+    <!-- Cinematic title -->
 
     <h1 class="hero-title">
 
+
       <span class="title-line">
+
         Building digital
+
       </span>
+
 
       <span class="title-line outline-line">
+
         experiences
+
       </span>
 
+
       <span class="title-line">
+
         that matter.
+
       </span>
+
 
     </h1>
 
 
     <p class="hero-text">
 
-      Hi, I'm <strong>Mehul Vasava</strong> —
-      an IT student and aspiring developer
-      focused on Machine Learning,
+      Hi, I'm
+      <strong>
+        Mehul Vasava
+      </strong>
+
+      — an IT student and aspiring
+      developer focused on Machine Learning,
       modern web development,
       and practical software projects.
 
     </p>
 
 
-    <!-- Quick Stats -->
+    <!-- =================================================
+         QUICK STATS
+         ================================================= -->
 
     <div class="quick-stats">
 
@@ -291,19 +478,18 @@
 
 
   <!-- =================================================
-       3D HERO ORBIT
+       EXISTING ORBIT
        ================================================= -->
 
   <div class="hero-orbit reveal">
 
 
-    <!-- Existing orbit -->
     <div class="orbit orbit1"></div>
 
     <div class="orbit orbit2"></div>
 
 
-    <!-- VM Core -->
+    <!-- Existing VM core -->
 
     <div class="core">
 
@@ -314,7 +500,7 @@
     </div>
 
 
-    <!-- Floating Skill Card 01 -->
+    <!-- Floating cards -->
 
     <div class="float-card c1">
 
@@ -327,8 +513,6 @@
     </div>
 
 
-    <!-- Floating Skill Card 02 -->
-
     <div class="float-card c2">
 
       Machine Learning
@@ -339,8 +523,6 @@
 
     </div>
 
-
-    <!-- Floating Skill Card 03 -->
 
     <div class="float-card c3">
 
@@ -356,7 +538,9 @@
   </div>
 
 
-  <!-- Scroll Indicator -->
+  <!-- =================================================
+       SCROLL CUE
+       ================================================= -->
 
   <div class="scroll-cue">
 
@@ -372,19 +556,23 @@
 </section>
 
 
-<!-- =====================================================
+<!-- ===================================================
      ABOUT
-     ===================================================== -->
+     =================================================== -->
 
-<section id="about"
-         class="section about">
+<section
+  id="about"
+  class="section about"
+>
 
 
   <div class="section-head reveal">
 
+
     <span>
       01 / ABOUT
     </span>
+
 
     <h2>
 
@@ -395,6 +583,7 @@
       </em>
 
     </h2>
+
 
   </div>
 
@@ -416,31 +605,26 @@
 
       <p>
 
-        I'm pursuing BSc IT with a growing
-        specialization in Machine Learning,
-        Data Science, Python, and Full Stack
-        Development.
+        I'm pursuing BSc IT with a growing specialization
+        in Machine Learning, Data Science, Python,
+        and Full Stack Development.
 
       </p>
 
 
       <p>
 
-        My projects focus on solving
-        real-world problems while keeping
-        the user experience simple and
-        professional.
+        My projects focus on solving real-world problems
+        while keeping the user experience simple and professional.
 
       </p>
 
 
       <p>
 
-        I'm continuously learning modern
-        technologies, improving my coding
-        skills, and preparing for
-        opportunities where I can contribute,
-        learn, and grow.
+        I'm continuously learning modern technologies,
+        improving my coding skills, and preparing for
+        opportunities where I can contribute, learn, and grow.
 
       </p>
 
@@ -487,18 +671,22 @@
 
   </div>
 
+
 </section>
 
 
-<!-- =====================================================
+<!-- ===================================================
      SKILLS
-     ===================================================== -->
+     =================================================== -->
 
-<section id="skills"
-         class="section dark">
+<section
+  id="skills"
+  class="section dark"
+>
 
 
   <div class="section-head reveal">
+
 
     <span>
       02 / SKILLS
@@ -515,6 +703,7 @@
 
     </h2>
 
+
   </div>
 
 
@@ -523,17 +712,21 @@
 
     <article class="skill reveal">
 
+
       <span>
         01
       </span>
+
 
       <h3>
         Programming
       </h3>
 
+
       <p>
         Python · C · C++ · Java · JavaScript
       </p>
+
 
       <div class="meter">
 
@@ -541,23 +734,27 @@
 
       </div>
 
+
     </article>
 
 
     <article class="skill reveal">
 
+
       <span>
         02
       </span>
+
 
       <h3>
         Web Development
       </h3>
 
+
       <p>
-        HTML5 · CSS3 · JavaScript · Node.js ·
-        Responsive Design · APIs
+        HTML5 · CSS3 · JavaScript · Node.js · Responsive Design · APIs
       </p>
+
 
       <div class="meter">
 
@@ -565,22 +762,27 @@
 
       </div>
 
+
     </article>
 
 
     <article class="skill reveal">
 
+
       <span>
         03
       </span>
+
 
       <h3>
         AI / Machine Learning
       </h3>
 
+
       <p>
         Data Handling · ML Algorithms · Python
       </p>
+
 
       <div class="meter">
 
@@ -588,22 +790,27 @@
 
       </div>
 
+
     </article>
 
 
     <article class="skill reveal">
 
+
       <span>
         04
       </span>
+
 
       <h3>
         Database
       </h3>
 
+
       <p>
         SQL · PL/SQL · JDBC · Data Handling
       </p>
+
 
       <div class="meter">
 
@@ -611,15 +818,17 @@
 
       </div>
 
+
     </article>
 
 
   </div>
 
 
-  <!-- Technology Cloud -->
+  <!-- Technology cloud -->
 
   <div class="tech-cloud reveal">
+
 
     <span>
       Python
@@ -653,25 +862,30 @@
       Scikit-learn
     </span>
 
+
   </div>
 
 
 </section>
 
 
-<!-- =====================================================
+<!-- ===================================================
      PROJECTS
-     ===================================================== -->
+     =================================================== -->
 
-<section id="projects"
-         class="section projects">
+<section
+  id="projects"
+  class="section projects"
+>
 
 
   <div class="section-head reveal">
 
+
     <span>
       03 / PROJECTS
     </span>
+
 
     <h2>
 
@@ -682,6 +896,7 @@
       </em>
 
     </h2>
+
 
   </div>
 
@@ -699,6 +914,7 @@
 
       <div>
 
+
         <p class="tag">
           MACHINE LEARNING
         </p>
@@ -711,9 +927,8 @@
 
         <p>
 
-          Predicting student performance
-          using academic and behavioral
-          features with data preprocessing,
+          Predicting student performance using academic
+          and behavioral features with data preprocessing,
           model training, and evaluation.
 
         </p>
@@ -739,9 +954,11 @@
       </div>
 
 
-      <a href="#contact"
-         class="arrow"
-         aria-label="Contact about Student Performance Prediction">
+      <a
+        href="#contact"
+        class="arrow"
+        aria-label="Contact about Student Performance Prediction"
+      >
 
         ↗
 
@@ -761,6 +978,7 @@
 
       <div>
 
+
         <p class="tag">
           MACHINE LEARNING
         </p>
@@ -773,11 +991,9 @@
 
         <p>
 
-          A classification project that
-          cleans applicant data, handles
-          missing values, encodes features,
-          trains a model, and predicts
-          loan approval.
+          A classification project that cleans applicant data,
+          handles missing values, encodes features, trains a model,
+          and predicts loan approval.
 
         </p>
 
@@ -802,9 +1018,11 @@
       </div>
 
 
-      <a href="#contact"
-         class="arrow"
-         aria-label="Contact about Loan Approval Prediction">
+      <a
+        href="#contact"
+        class="arrow"
+        aria-label="Contact about Loan Approval Prediction"
+      >
 
         ↗
 
@@ -820,15 +1038,18 @@
 </section>
 
 
-<!-- =====================================================
+<!-- ===================================================
      EDUCATION
-     ===================================================== -->
+     =================================================== -->
 
-<section id="education"
-         class="section dark">
+<section
+  id="education"
+  class="section dark"
+>
 
 
   <div class="section-head reveal">
+
 
     <span>
       04 / EDUCATION
@@ -845,6 +1066,7 @@
 
     </h2>
 
+
   </div>
 
 
@@ -853,12 +1075,14 @@
 
     <div class="timeline-item reveal">
 
+
       <span>
         Current
       </span>
 
 
       <div>
+
 
         <h3>
           Bachelor of Science in Information Technology
@@ -867,19 +1091,21 @@
 
         <p>
 
-          BSc IT · Focus areas:
-          Programming, Web Development,
-          Databases, Data Science &
-          Machine Learning
+          BSc IT · Focus areas: Programming,
+          Web Development, Databases,
+          Data Science & Machine Learning
 
         </p>
 
+
       </div>
+
 
     </div>
 
 
     <div class="timeline-item reveal">
+
 
       <span>
         Learning
@@ -888,6 +1114,7 @@
 
       <div>
 
+
         <h3>
           AI / ML & Full Stack Development
         </h3>
@@ -895,14 +1122,14 @@
 
         <p>
 
-          Hands-on practice through
-          academic assignments,
-          personal projects, and
-          continuous technology learning.
+          Hands-on practice through academic assignments,
+          personal projects, and continuous technology learning.
 
         </p>
 
+
       </div>
+
 
     </div>
 
@@ -913,12 +1140,14 @@
 </section>
 
 
-<!-- =====================================================
+<!-- ===================================================
      CONTACT
-     ===================================================== -->
+     =================================================== -->
 
-<section id="contact"
-         class="section contact">
+<section
+  id="contact"
+  class="section contact"
+>
 
 
   <div class="contact-box reveal">
@@ -944,15 +1173,14 @@
 
     <p>
 
-      I'm open to internships,
-      projects, collaborations,
-      and learning opportunities.
+      I'm open to internships, projects,
+      collaborations, and learning opportunities.
       Feel free to connect with me.
 
     </p>
 
 
-    <!-- Social Media -->
+    <!-- SOCIAL MEDIA -->
 
     <div class="social-icons">
 
@@ -962,7 +1190,8 @@
       <a
         href="mailto:mv3453215@gmail.com"
         aria-label="Email"
-        title="Email">
+        title="Email"
+      >
 
         <i class="fa-solid fa-envelope"></i>
 
@@ -976,7 +1205,8 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
-        title="LinkedIn">
+        title="LinkedIn"
+      >
 
         <i class="fa-brands fa-linkedin-in"></i>
 
@@ -990,7 +1220,8 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
-        title="GitHub">
+        title="GitHub"
+      >
 
         <i class="fa-brands fa-github"></i>
 
@@ -1004,7 +1235,8 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
-        title="Instagram">
+        title="Instagram"
+      >
 
         <i class="fa-brands fa-instagram"></i>
 
@@ -1031,8 +1263,11 @@
 ```
 👁️ Visitors:
 
+
 <span id="visitorCount">
+
   Loading...
+
 </span>
 ```
 
@@ -1046,7 +1281,9 @@
 
 ```
 <span>
+
   © 2026 VM
+
 </span>
 ```
 
@@ -1058,50 +1295,67 @@
 
   <script>
 
+
     const visitorCount =
-      document.getElementById("visitorCount");
+      document.getElementById(
+        "visitorCount"
+      );
 
 
     fetch(
       "https://countapi.mileshilliard.com/api/v1/hit/mehulvasava-portfolio-visits"
     )
 
-      .then(response => {
 
-        if (!response.ok) {
-          throw new Error(
-            "Failed to fetch visitor count"
-          );
+      .then(
+        response => {
+
+          if (!response.ok) {
+
+            throw new Error(
+              "Failed to fetch visitor count"
+            );
+
+          }
+
+
+          return response.json();
+
         }
-
-        return response.json();
-
-      })
+      )
 
 
-      .then(data => {
+      .then(
+        data => {
 
-        visitorCount.textContent =
-          data.value ?? "—";
+          visitorCount.textContent =
+            data.value ?? "—";
 
-      })
+        }
+      )
 
 
-      .catch(error => {
+      .catch(
+        error => {
 
-        console.error(
-          "Visitor counter error:",
-          error
-        );
+          console.error(
+            "Visitor counter error:",
+            error
+          );
 
-        visitorCount.textContent =
-          "—";
 
-      });
+          visitorCount.textContent =
+            "—";
+
+        }
+      );
+
 
   </script>
 
-  <!-- Main JavaScript -->
+  <!-- =====================================================
+       YOUR JAVASCRIPT
+       ===================================================== -->
 
   <script src="script.js"></script>
 
