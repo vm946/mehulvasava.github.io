@@ -444,3 +444,873 @@
   }
 
 }
+/* =========================================================
+   MEHUL VASAVA
+   ADVANCED LUXURY SCROLL ANIMATION SYSTEM
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+main,
+section {
+  position: relative;
+}
+
+
+/* =========================================================
+   PREMIUM REVEAL
+   ========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform:
+    translate3d(0, 70px, 0)
+    scale(0.97);
+
+  transition:
+    opacity 1s cubic-bezier(.16,1,.3,1),
+    transform 1s cubic-bezier(.16,1,.3,1);
+
+  transition-delay:
+    var(--reveal-delay, 0ms);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+.reveal.show,
+.reveal.is-visible {
+  opacity: 1;
+
+  transform:
+    translate3d(0,0,0)
+    scale(1);
+}
+
+
+/* =========================================================
+   ALTERNATING REVEALS
+   ========================================================= */
+
+.about-copy.reveal {
+  transform:
+    translate3d(-80px,0,0)
+    scale(.96);
+}
+
+.about-card.reveal {
+  transform:
+    translate3d(80px,0,0)
+    scale(.94);
+}
+
+.about-copy.reveal.show,
+.about-card.reveal.show {
+  transform:
+    translate3d(0,0,0)
+    scale(1);
+}
+
+
+.project.reveal {
+  transform:
+    translate3d(70px,40px,0)
+    rotateY(-5deg)
+    scale(.95);
+
+  transition-delay:
+    var(--stagger-delay,0ms);
+}
+
+.project.reveal.show {
+  transform:
+    translate3d(0,0,0)
+    rotateY(0)
+    scale(1);
+}
+
+
+.skill.reveal {
+  transform:
+    translate3d(0,55px,0)
+    scale(.9);
+
+  transition-delay:
+    var(--stagger-delay,0ms);
+}
+
+.skill.reveal.show {
+  transform:
+    translate3d(0,0,0)
+    scale(1);
+}
+
+
+.timeline-item.reveal {
+  transform:
+    translate3d(-65px,0,0);
+
+  transition-delay:
+    var(--stagger-delay,0ms);
+}
+
+.timeline-item.reveal.show {
+  transform:
+    translate3d(0,0,0);
+}
+
+
+/* =========================================================
+   3D CARD SYSTEM
+   ========================================================= */
+
+.project,
+.skill,
+.about-card {
+  transform-style: preserve-3d;
+
+  perspective: 1000px;
+
+  transition:
+    transform .5s cubic-bezier(.16,1,.3,1),
+    box-shadow .5s ease,
+    border-color .4s ease;
+}
+
+.project.tilting,
+.skill.tilting,
+.about-card.tilting {
+
+  transform:
+    perspective(1000px)
+    rotateX(var(--rotate-x,0deg))
+    rotateY(var(--rotate-y,0deg))
+    translateY(-8px)
+    scale(1.015);
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.22);
+}
+
+
+/* =========================================================
+   CARD SHINE
+   ========================================================= */
+
+.project::after,
+.skill::after,
+.about-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255,255,255,.12) 45%,
+      transparent 70%
+    );
+
+  transform:
+    translateX(-120%);
+
+  transition:
+    transform .8s ease;
+
+  border-radius:
+    inherit;
+}
+
+.project:hover::after,
+.skill:hover::after,
+.about-card:hover::after {
+
+  transform:
+    translateX(120%);
+}
+
+
+/* =========================================================
+   PROJECT DEPTH
+   ========================================================= */
+
+.project > *,
+.skill > *,
+.about-card > * {
+
+  transform:
+    translateZ(20px);
+}
+
+
+/* =========================================================
+   SKILL BAR
+   ========================================================= */
+
+.meter {
+  overflow: hidden;
+}
+
+.meter i {
+
+  display: block;
+
+  width: 0 !important;
+
+  transition:
+    width 1.7s
+    cubic-bezier(.16,1,.3,1);
+
+  will-change:
+    width;
+}
+
+.meter i.meter-active {
+
+  width:
+    var(--target-width) !important;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline {
+
+  --timeline-progress: 0%;
+
+}
+
+.timeline::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 0;
+
+  width: 2px;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #7b61ff
+      var(--timeline-progress),
+      rgba(255,255,255,.08)
+      var(--timeline-progress)
+    );
+
+  transition:
+    background .2s linear;
+
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.section-head {
+
+  position: relative;
+}
+
+.section-head::after {
+
+  content: "";
+
+  display: block;
+
+  width: 0;
+
+  height: 2px;
+
+  margin-top: 14px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7b61ff,
+      transparent
+    );
+
+  transition:
+    width 1.2s
+    cubic-bezier(.16,1,.3,1);
+
+}
+
+.section-head.show::after {
+
+  width: 120px;
+
+}
+
+
+/* =========================================================
+   TEXT MASK FEEL
+   ========================================================= */
+
+.section-head h2,
+.hero h1 {
+
+  transition:
+    transform 1s
+    cubic-bezier(.16,1,.3,1),
+    opacity 1s
+    cubic-bezier(.16,1,.3,1);
+
+}
+
+
+/* =========================================================
+   IMAGE REVEAL
+   ========================================================= */
+
+img {
+
+  transition:
+    transform 1.2s
+    cubic-bezier(.16,1,.3,1),
+    opacity .8s ease,
+    filter .8s ease;
+
+}
+
+img:not(.image-loaded) {
+
+  opacity: .65;
+
+  filter:
+    blur(8px);
+
+}
+
+img.image-loaded {
+
+  opacity: 1;
+
+  filter:
+    blur(0);
+
+}
+
+
+/* =========================================================
+   HERO PARALLAX
+   ========================================================= */
+
+.hero-orbit,
+.hero-grid,
+.hero-glow,
+.hero-image {
+
+  will-change:
+    transform;
+
+}
+
+.hero-orbit {
+
+  transition:
+    transform .15s linear;
+}
+
+
+/* =========================================================
+   FLOATING BACKGROUND GLOW
+   ========================================================= */
+
+body::before {
+
+  content: "";
+
+  position: fixed;
+
+  width: 450px;
+
+  height: 450px;
+
+  left:
+    var(--mouse-x,50%);
+
+  top:
+    var(--mouse-y,30%);
+
+  transform:
+    translate(-50%,-50%);
+
+  pointer-events:
+    none;
+
+  z-index:
+    -1;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(123,97,255,.09),
+      transparent 65%
+    );
+
+  filter:
+    blur(15px);
+
+  transition:
+    left .2s ease-out,
+    top .2s ease-out;
+
+}
+
+
+/* =========================================================
+   CURSOR SPOTLIGHT
+   ========================================================= */
+
+.cursor-glow {
+
+  position: fixed;
+
+  width: 180px;
+
+  height: 180px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(123,97,255,.12),
+      transparent 68%
+    );
+
+  mix-blend-mode:
+    screen;
+
+  transition:
+    left .08s linear,
+    top .08s linear;
+
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar,
+header {
+
+  transition:
+    transform .45s
+    cubic-bezier(.16,1,.3,1),
+    background .4s ease,
+    box-shadow .4s ease;
+
+}
+
+.nav-scrolled {
+
+  background:
+    rgba(10,10,15,.78);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  box-shadow:
+    0 10px 40px
+    rgba(0,0,0,.18);
+
+}
+
+.nav-hidden {
+
+  transform:
+    translateY(-100%);
+
+}
+
+
+/* =========================================================
+   ACTIVE NAV
+   ========================================================= */
+
+nav a {
+
+  position: relative;
+
+}
+
+nav a::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -6px;
+
+  width: 0;
+
+  height: 2px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    #7b61ff;
+
+  transition:
+    width .35s
+    cubic-bezier(.16,1,.3,1);
+
+}
+
+nav a:hover::after,
+nav a.active::after {
+
+  width: 100%;
+
+}
+
+
+/* =========================================================
+   PROJECT ARROW
+   ========================================================= */
+
+.project .arrow {
+
+  transition:
+    transform .45s
+    cubic-bezier(.16,1,.3,1);
+
+}
+
+.project:hover .arrow {
+
+  transform:
+    translate3d(10px,-10px,0)
+    scale(1.15);
+
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+   ========================================================= */
+
+.social-icons a {
+
+  transition:
+    transform .4s
+    cubic-bezier(.16,1,.3,1),
+    box-shadow .4s ease;
+
+}
+
+.social-icons a:hover {
+
+  transform:
+    translateY(-8px)
+    rotate(-3deg)
+    scale(1.08);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.2);
+
+}
+
+
+/* =========================================================
+   CHIPS
+   ========================================================= */
+
+.chips span,
+.tech-cloud span {
+
+  transition:
+    transform .35s
+    cubic-bezier(.16,1,.3,1),
+    background .35s ease,
+    color .35s ease;
+
+}
+
+.chips span:hover,
+.tech-cloud span:hover {
+
+  transform:
+    translateY(-5px)
+    scale(1.04);
+
+}
+
+
+/* =========================================================
+   SCROLL PROGRESS
+   ========================================================= */
+
+.progress {
+
+  transform-origin:
+    left center;
+
+  transition:
+    width .08s linear;
+
+  box-shadow:
+    0 0 15px
+    rgba(123,97,255,.55);
+
+}
+
+
+/* =========================================================
+   SCROLL VELOCITY EFFECT
+   ========================================================= */
+
+section {
+
+  --velocity:
+    var(--scroll-velocity,0);
+
+}
+
+
+/* =========================================================
+   SCROLL CUE
+   ========================================================= */
+
+.scroll-cue {
+
+  animation:
+    luxuryScrollCue
+    2.2s
+    ease-in-out
+    infinite;
+
+}
+
+@keyframes luxuryScrollCue {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0);
+
+    opacity:
+      .5;
+
+  }
+
+  50% {
+
+    transform:
+      translateY(10px);
+
+    opacity:
+      1;
+
+  }
+
+}
+
+
+/* =========================================================
+   GLOW ORBS
+   ========================================================= */
+
+.hero::before,
+.hero::after {
+
+  animation:
+    floatingGlow
+    8s
+    ease-in-out
+    infinite alternate;
+
+}
+
+@keyframes floatingGlow {
+
+  from {
+
+    transform:
+      translate3d(-20px,-10px,0)
+      scale(1);
+
+  }
+
+  to {
+
+    transform:
+      translate3d(30px,20px,0)
+      scale(1.08);
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .reveal {
+
+    transform:
+      translate3d(0,40px,0)
+      scale(.98);
+
+    transition-duration:
+      .75s;
+
+  }
+
+  .about-copy.reveal,
+  .about-card.reveal,
+  .project.reveal,
+  .timeline-item.reveal {
+
+    transform:
+      translate3d(0,40px,0)
+      scale(.98);
+
+  }
+
+  .about-copy.reveal.show,
+  .about-card.reveal.show,
+  .project.reveal.show,
+  .timeline-item.reveal.show {
+
+    transform:
+      translate3d(0,0,0)
+      scale(1);
+
+  }
+
+  .cursor-glow {
+
+    display:
+      none;
+
+  }
+
+  body::before {
+
+    display:
+      none;
+
+  }
+
+  .project.tilting,
+  .skill.tilting,
+  .about-card.tilting {
+
+    transform:
+      translateY(-5px)
+      scale(1.01);
+
+  }
+
+  .timeline::before {
+
+    left:
+      8px;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+
+    scroll-behavior:
+      auto;
+
+  }
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+
+  }
+
+  .reveal,
+  .project.reveal,
+  .skill.reveal,
+  .timeline-item.reveal,
+  .about-copy.reveal,
+  .about-card.reveal {
+
+    opacity:
+      1 !important;
+
+    transform:
+      none !important;
+
+  }
+
+  .cursor-glow,
+  body::before {
+
+    display:
+      none !important;
+
+  }
+
+}
