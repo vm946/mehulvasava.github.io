@@ -749,3 +749,295 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+/* =========================================================
+   LIVE HERO EXPERIENCE
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const hero = document.querySelector(".hero");
+  const orbit = document.querySelector(".hero-orbit");
+  const particleContainer = document.querySelector(".hero-particles");
+
+  if (!hero) return;
+
+
+  /* =======================================================
+     PARTICLE SYSTEM
+     ======================================================= */
+
+  if (particleContainer) {
+
+    const particleCount =
+      window.innerWidth <= 600 ? 28 : 55;
+
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < particleCount; i++) {
+
+      const particle =
+        document.createElement("span");
+
+      particle.className = "hero-particle";
+
+      const startX =
+        Math.random() * 100;
+
+      const endX =
+        startX +
+        (Math.random() * 30 - 15);
+
+      const duration =
+        8 + Math.random() * 14;
+
+      const delay =
+        -(Math.random() * duration);
+
+      particle.style.left =
+        `${startX}%`;
+
+      particle.style.setProperty(
+        "--x-start",
+        `${(Math.random() * 30 - 15)}px`
+      );
+
+      particle.style.setProperty(
+        "--x-end",
+        `${endX - startX}vw`
+      );
+
+      particle.style.setProperty(
+        "--duration",
+        `${duration}s`
+      );
+
+      particle.style.animationDelay =
+        `${delay}s`;
+
+      /*
+       * Different particle sizes create
+       * a more natural depth effect.
+       */
+
+      const size =
+        Math.random() * 3 + 1;
+
+      particle.style.width =
+        `${size}px`;
+
+      particle.style.height =
+        `${size}px`;
+
+      /*
+       * Purple / blue / neutral live particles.
+       */
+
+      const hue =
+        Math.random() > .5
+          ? "rgb(123 97 255)"
+          : "rgb(60 150 255)";
+
+      particle.style.color = hue;
+
+      fragment.appendChild(particle);
+    }
+
+    particleContainer.appendChild(fragment);
+  }
+
+
+  /* =======================================================
+     MOUSE 3D PARALLAX
+     ======================================================= */
+
+  if (
+    orbit &&
+    window.matchMedia(
+      "(pointer: fine)"
+    ).matches
+  ) {
+
+    let rafId = null;
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    const animateParallax = () => {
+
+      currentX +=
+        (mouseX - currentX) * .08;
+
+      currentY +=
+        (mouseY - currentY) * .08;
+
+      const rotateY =
+        currentX * 10;
+
+      const rotateX =
+        currentY * -8;
+
+      orbit.style.transform =
+        `
+        translate3d(
+          ${currentX * 10}px,
+          ${currentY * 10}px,
+          0
+        )
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        `;
+
+      rafId =
+        requestAnimationFrame(
+          animateParallax
+        );
+    };
+
+    const handleMouseMove = (event) => {
+
+      const rect =
+        hero.getBoundingClientRect();
+
+      mouseX =
+        (event.clientX -
+          (rect.left + rect.width / 2))
+        / rect.width;
+
+      mouseY =
+        (event.clientY -
+          (rect.top + rect.height / 2))
+        / rect.height;
+
+      orbit.classList.add(
+        "mouse-active"
+      );
+
+      if (!rafId) {
+        rafId =
+          requestAnimationFrame(
+            animateParallax
+          );
+      }
+    };
+
+    const resetParallax = () => {
+
+      mouseX = 0;
+      mouseY = 0;
+
+      orbit.style.transform =
+        "";
+
+      orbit.classList.remove(
+        "mouse-active"
+      );
+    };
+
+    hero.addEventListener(
+      "mousemove",
+      handleMouseMove,
+      { passive: true }
+    );
+
+    hero.addEventListener(
+      "mouseleave",
+      resetParallax
+    );
+  }
+
+
+  /* =======================================================
+     HERO GRID PARALLAX
+     ======================================================= */
+
+  const grid =
+    document.querySelector(".hero-grid");
+
+  if (
+    grid &&
+    window.matchMedia(
+      "(pointer: fine)"
+    ).matches
+  ) {
+
+    hero.addEventListener(
+      "mousemove",
+      (event) => {
+
+        const rect =
+          hero.getBoundingClientRect();
+
+        const x =
+          (event.clientX -
+            rect.left) /
+          rect.width -
+          .5;
+
+        const y =
+          (event.clientY -
+            rect.top) /
+          rect.height -
+          .5;
+
+        grid.style.transform =
+          `
+          translate(
+            ${x * -14}px,
+            ${y * -10}px
+          )
+          `;
+      },
+      { passive: true }
+    );
+
+    hero.addEventListener(
+      "mouseleave",
+      () => {
+        grid.style.transform = "";
+      }
+    );
+  }
+
+
+  /* =======================================================
+     HERO VISIBILITY BOOST
+     ======================================================= */
+
+  const heroElements =
+    document.querySelectorAll(
+      ".hero .float-card, .hero .core"
+    );
+
+  heroElements.forEach(
+    (element, index) => {
+
+      element.style.animationDelay =
+        `${index * .18}s`;
+    }
+  );
+
+
+  /* =======================================================
+     SMART MOBILE PARTICLE REDUCTION
+     ======================================================= */
+
+  const reduceMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+  if (reduceMotion.matches) {
+
+    if (particleContainer) {
+      particleContainer.innerHTML = "";
+    }
+
+    if (orbit) {
+      orbit.style.transform = "";
+    }
+  }
+
+});
