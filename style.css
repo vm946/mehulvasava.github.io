@@ -2290,3 +2290,753 @@ img.image-loaded {
   }
 
 }
+/* =========================================================
+   CINEMATIC AI / ML HERO
+   ========================================================= */
+
+.hero {
+    overflow: hidden;
+    perspective: 1600px;
+}
+
+/* =========================================================
+   AI SCENE
+   ========================================================= */
+
+.ai-scene {
+    position: absolute;
+    width: min(58vw, 760px);
+    height: min(58vw, 760px);
+
+    right: -4%;
+    top: 50%;
+
+    transform:
+        translateY(-50%)
+        translateZ(0);
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform .15s ease-out;
+}
+
+
+/* =========================================================
+   CANVAS
+   ========================================================= */
+
+#neuralCanvas {
+    position: absolute;
+
+    inset: -15%;
+
+    width: 130%;
+    height: 130%;
+
+    pointer-events: none;
+
+    opacity: .85;
+}
+
+
+/* =========================================================
+   AI SPHERE
+   ========================================================= */
+
+.ai-sphere {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(30vw, 390px);
+    height: min(30vw, 390px);
+
+    transform:
+        translate(-50%, -50%)
+        rotateX(8deg);
+
+    border-radius: 50%;
+
+    transform-style: preserve-3d;
+
+    animation:
+        sphereFloat 7s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 0 35px
+            rgba(112, 82, 255, .25)
+        );
+}
+
+
+@keyframes sphereFloat {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translateY(0)
+            rotateX(8deg);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateY(-15px)
+            rotateX(12deg);
+    }
+}
+
+
+/* =========================================================
+   SPHERE RINGS
+   ========================================================= */
+
+.sphere-ring {
+    position: absolute;
+
+    inset: -3%;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(125, 105, 255, .35);
+
+    box-shadow:
+        0 0 20px
+        rgba(108, 85, 255, .12);
+
+    transform-style: preserve-3d;
+}
+
+
+.sphere-ring-1 {
+    animation:
+        sphereRotate1 10s linear infinite;
+}
+
+
+.sphere-ring-2 {
+    inset: 7%;
+
+    border-color:
+        rgba(60, 180, 255, .28);
+
+    animation:
+        sphereRotate2 14s linear infinite reverse;
+}
+
+
+.sphere-ring-3 {
+    inset: 15%;
+
+    border-color:
+        rgba(255, 255, 255, .13);
+
+    border-style: dashed;
+
+    animation:
+        sphereRotate3 18s linear infinite;
+}
+
+
+@keyframes sphereRotate1 {
+
+    from {
+        transform:
+            rotateX(70deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            rotateX(70deg)
+            rotateZ(360deg);
+    }
+}
+
+
+@keyframes sphereRotate2 {
+
+    from {
+        transform:
+            rotateY(65deg)
+            rotateZ(360deg);
+    }
+
+    to {
+        transform:
+            rotateY(65deg)
+            rotateZ(0deg);
+    }
+}
+
+
+@keyframes sphereRotate3 {
+
+    from {
+        transform:
+            rotateX(55deg)
+            rotateY(25deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            rotateX(55deg)
+            rotateY(25deg)
+            rotateZ(360deg);
+    }
+}
+
+
+/* =========================================================
+   SPHERE CORE
+   ========================================================= */
+
+.sphere-core {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 43%;
+    height: 43%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255,255,255,.95),
+            rgba(126,101,255,.65) 15%,
+            rgba(54,42,140,.85) 45%,
+            rgba(7,7,20,.98) 75%
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
+    box-shadow:
+
+        inset
+        0 0 35px
+        rgba(255,255,255,.14),
+
+        0 0 30px
+        rgba(107,81,255,.55),
+
+        0 0 100px
+        rgba(80,80,255,.22);
+
+    animation:
+        coreEnergy 2.6s ease-in-out infinite;
+}
+
+
+.sphere-core span {
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size:
+        clamp(35px, 5vw, 70px);
+
+    font-weight: 800;
+
+    letter-spacing: -5px;
+
+    color: white;
+
+    text-shadow:
+        0 0 15px
+        rgba(255,255,255,.7),
+
+        0 0 35px
+        rgba(120,90,255,.8);
+}
+
+
+.sphere-core small {
+
+    margin-top: -5px;
+
+    font-size: 11px;
+
+    letter-spacing: 7px;
+
+    color:
+        rgba(255,255,255,.7);
+}
+
+
+@keyframes coreEnergy {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.06);
+    }
+}
+
+
+/* =========================================================
+   AI NODES
+   ========================================================= */
+
+.ai-node {
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        #fff;
+
+    box-shadow:
+
+        0 0 5px white,
+
+        0 0 15px
+        rgba(108, 89, 255, .9),
+
+        0 0 30px
+        rgba(72, 180, 255, .65);
+
+    animation:
+        nodePulse 2s ease-in-out infinite;
+}
+
+
+.ai-node::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(130,110,255,.25);
+
+    animation:
+        nodeRipple 2s ease-out infinite;
+}
+
+
+@keyframes nodePulse {
+
+    0%,
+    100% {
+        opacity: .55;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.35);
+    }
+}
+
+
+@keyframes nodeRipple {
+
+    from {
+        opacity: .8;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+
+/* NODE POSITIONS */
+
+.node-1 {
+    left: 15%;
+    top: 30%;
+}
+
+.node-2 {
+    left: 28%;
+    top: 10%;
+    animation-delay: -.4s;
+}
+
+.node-3 {
+    left: 70%;
+    top: 14%;
+    animation-delay: -.8s;
+}
+
+.node-4 {
+    right: 7%;
+    top: 45%;
+    animation-delay: -1.1s;
+}
+
+.node-5 {
+    right: 22%;
+    bottom: 12%;
+    animation-delay: -1.5s;
+}
+
+.node-6 {
+    left: 28%;
+    bottom: 8%;
+    animation-delay: -.7s;
+}
+
+.node-7 {
+    left: 5%;
+    top: 62%;
+    animation-delay: -1.8s;
+}
+
+.node-8 {
+    left: 53%;
+    top: 3%;
+    animation-delay: -1.3s;
+}
+
+
+/* =========================================================
+   DATA LABELS
+   ========================================================= */
+
+.data-label {
+
+    position: absolute;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px 12px;
+
+    border:
+        1px solid
+        rgba(120,100,255,.18);
+
+    background:
+        rgba(10,10,20,.38);
+
+    backdrop-filter:
+        blur(12px);
+
+    border-radius: 30px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.12);
+
+    animation:
+        labelFloat 4s ease-in-out infinite;
+}
+
+
+.data-label span {
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+        #7d68ff;
+
+    box-shadow:
+        0 0 10px
+        #7d68ff;
+
+}
+
+
+.label-1 {
+    top: 19%;
+    right: 3%;
+}
+
+
+.label-2 {
+    bottom: 20%;
+    left: 1%;
+
+    animation-delay: -1.4s;
+}
+
+
+.label-3 {
+    top: 50%;
+    left: -4%;
+
+    animation-delay: -2.3s;
+}
+
+
+@keyframes labelFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-8px);
+    }
+}
+
+
+/* =========================================================
+   CURSOR TRAIL
+   ========================================================= */
+
+#cursorTrail {
+
+    position: fixed;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 99999;
+
+    opacity: 0;
+
+    background:
+        rgba(255,255,255,.9);
+
+    box-shadow:
+
+        0 0 10px
+        rgba(255,255,255,.9),
+
+        0 0 25px
+        rgba(111,85,255,.8),
+
+        0 0 55px
+        rgba(70,150,255,.5);
+
+    transform:
+        translate(-50%, -50%);
+
+    transition:
+        width .2s ease,
+        height .2s ease,
+        opacity .3s ease;
+}
+
+
+body.cursor-active #cursorTrail {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   PARTICLE INTERACTION
+   ========================================================= */
+
+.hero-particle {
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+
+/* =========================================================
+   DESKTOP AI SCENE PARALLAX
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+    .ai-scene {
+        will-change:
+            transform;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .ai-scene {
+
+        width: 58vw;
+        height: 58vw;
+
+        right: -12%;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .ai-scene {
+
+        position: relative;
+
+        width: 430px;
+        height: 430px;
+
+        max-width: 110vw;
+        max-height: 110vw;
+
+        right: auto;
+        top: auto;
+
+        margin:
+            -40px auto
+            -50px;
+
+        transform: none;
+    }
+
+
+    .ai-sphere {
+
+        width: 280px;
+        height: 280px;
+    }
+
+
+    .data-label {
+
+        font-size: 7px;
+        padding: 6px 9px;
+    }
+
+
+    .label-1 {
+        right: 0;
+    }
+
+    .label-2 {
+        left: 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .ai-scene {
+
+        width: 360px;
+        height: 360px;
+
+        margin-top: -25px;
+    }
+
+
+    .ai-sphere {
+
+        width: 235px;
+        height: 235px;
+    }
+
+
+    .data-label {
+
+        transform: scale(.8);
+    }
+
+
+    .label-1 {
+        right: -5%;
+    }
+
+    .label-2 {
+        left: -5%;
+    }
+
+    .label-3 {
+        left: -8%;
+    }
+
+
+    #cursorTrail {
+        display: none;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ai-sphere,
+    .sphere-ring,
+    .sphere-core,
+    .ai-node,
+    .data-label {
+
+        animation: none !important;
+    }
+
+}
