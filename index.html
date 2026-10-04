@@ -2,25 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
     name="description"
     content="Mehul Vasava — BSc IT student focused on AI/ML, Python and Full Stack Development."
   >
 
-  <meta
-    name="theme-color"
-    content="#031c17"
-  >
+  <meta name="theme-color" content="#031c17">
 
   <title>Mehul Vasava — AI/ML • Full Stack</title>
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -35,6 +28,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
   >
 
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -45,7 +39,6 @@
   ========================================== -->
 
   <div class="preloader" id="preloader">
-
     <div class="preloader-inner">
 
       <div class="preloader-mark">
@@ -61,7 +54,6 @@
       </p>
 
     </div>
-
   </div>
 
 
@@ -75,7 +67,7 @@
 
 
   <!-- =========================================
-       GLOBAL CURSOR
+       CUSTOM CURSOR
   ========================================== -->
 
   <div class="cursor-dot"></div>
@@ -83,17 +75,29 @@
 
 
   <!-- =========================================
-       NAVIGATION
+       HEADER
   ========================================== -->
 
   <header class="site-header" id="siteHeader">
 
     <nav class="navbar">
 
+      <!-- BRAND -->
+
       <a href="#home" class="brand">
-        <span class="brand-symbol">MV</span>
-        <span class="brand-name">MEHUL VASAVA</span>
+
+        <span class="brand-symbol">
+          MV
+        </span>
+
+        <span class="brand-name">
+          MEHUL VASAVA
+        </span>
+
       </a>
+
+
+      <!-- MOBILE MENU -->
 
       <button
         class="menu-toggle"
@@ -101,9 +105,14 @@
         aria-label="Open navigation"
         aria-expanded="false"
       >
+
         <span></span>
         <span></span>
+
       </button>
+
+
+      <!-- NAVIGATION -->
 
       <div class="nav-menu" id="navMenu">
 
@@ -139,9 +148,15 @@
 
       </div>
 
+
+      <!-- CTA -->
+
       <a href="#contact" class="nav-cta">
+
         Let's Talk
+
         <i class="fa-solid fa-arrow-up-right"></i>
+
       </a>
 
     </nav>
@@ -149,20 +164,32 @@
   </header>
 
 
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
   <main>
 
-    <!-- =========================================
-         HOME
-    ========================================== -->
 
-    <section id="home" class="luxury-section hero-section">
+    <!-- =======================================
+         HOME
+    ======================================== -->
+
+    <section
+      id="home"
+      class="luxury-section hero-section"
+    >
 
       <div class="hero-noise"></div>
 
       <div class="hero-glow hero-glow-one"></div>
+
       <div class="hero-glow hero-glow-two"></div>
 
       <div class="hero-grid"></div>
+
+
+      <!-- HERO TOP -->
 
       <div class="hero-top">
 
@@ -177,7 +204,12 @@
       </div>
 
 
+      <!-- HERO CONTENT -->
+
       <div class="hero-content">
+
+
+        <!-- INTRO -->
 
         <div class="hero-intro reveal">
 
@@ -190,6 +222,8 @@
         </div>
 
 
+        <!-- NAME -->
+
         <div class="hero-title-wrap">
 
           <div class="hero-index">
@@ -198,18 +232,8 @@
 
           <h1 class="hero-title">
 
-            <span
-              class="hero-title-line"
-              data-speed="-0.08"
-            >
-              MEHUL
-            </span>
-
-            <span
-              class="hero-title-line hero-title-outline"
-              data-speed="0.08"
-            >
-              VASAVA
+            <span class="hero-title-line">
+              MEHUL VASAVA
             </span>
 
           </h1>
@@ -217,7 +241,12 @@
         </div>
 
 
+        <!-- HERO BOTTOM -->
+
         <div class="hero-bottom">
+
+
+          <!-- DESCRIPTION -->
 
           <div class="hero-description reveal">
 
@@ -226,13 +255,14 @@
             </span>
 
             <p>
-              I create intelligent digital experiences
-              where technology, design and motion
-              come together.
+              I create intelligent digital experiences where
+              technology, design and motion come together.
             </p>
 
           </div>
 
+
+          <!-- ACTIONS -->
 
           <div class="hero-actions reveal">
 
@@ -240,10 +270,15 @@
               href="#projects"
               class="luxury-button magnetic"
             >
-              <span>Explore Work</span>
+
+              <span>
+                Explore Work
+              </span>
 
               <i class="fa-solid fa-arrow-up-right"></i>
+
             </a>
+
 
             <a
               href="#contact"
@@ -259,7 +294,7 @@
       </div>
 
 
-      <!-- 3D HERO OBJECT -->
+      <!-- HERO VISUAL -->
 
       <div
         class="hero-visual"
@@ -267,10 +302,14 @@
       >
 
         <div class="hero-orbit orbit-one"></div>
+
         <div class="hero-orbit orbit-two"></div>
+
         <div class="hero-orbit orbit-three"></div>
 
+
         <div class="hero-card">
+
 
           <div class="hero-card-top">
 
@@ -279,8 +318,11 @@
             </span>
 
             <span class="online">
+
               <i></i>
+
               ONLINE
+
             </span>
 
           </div>
@@ -289,8 +331,11 @@
           <div class="hero-core">
 
             <div class="core-ring core-ring-one"></div>
+
             <div class="core-ring core-ring-two"></div>
+
             <div class="core-ring core-ring-three"></div>
+
 
             <div class="core-center">
 
@@ -310,18 +355,41 @@
           <div class="hero-card-bottom">
 
             <div>
-              <span>FIELD</span>
-              <strong>AI / ML</strong>
+
+              <span>
+                FIELD
+              </span>
+
+              <strong>
+                AI / ML
+              </strong>
+
             </div>
 
-            <div>
-              <span>STACK</span>
-              <strong>FULL</strong>
-            </div>
 
             <div>
-              <span>STATUS</span>
-              <strong>ACTIVE</strong>
+
+              <span>
+                STACK
+              </span>
+
+              <strong>
+                FULL
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                STATUS
+              </span>
+
+              <strong>
+                ACTIVE
+              </strong>
+
             </div>
 
           </div>
@@ -329,50 +397,92 @@
         </div>
 
 
+        <!-- FLOATING LABELS -->
+
         <div class="floating-label label-one">
-          <span>01</span>
+
+          <span>
+            01
+          </span>
+
           PYTHON
+
         </div>
+
 
         <div class="floating-label label-two">
-          <span>02</span>
+
+          <span>
+            02
+          </span>
+
           MACHINE LEARNING
+
         </div>
 
+
         <div class="floating-label label-three">
-          <span>03</span>
+
+          <span>
+            03
+          </span>
+
           FULL STACK
+
         </div>
 
       </div>
 
+
+      <!-- MARQUEE -->
 
       <div class="hero-marquee">
 
         <div class="marquee-track">
 
-          <span>AI / MACHINE LEARNING</span>
+          <span>
+            AI / MACHINE LEARNING
+          </span>
+
           <b>✦</b>
 
-          <span>FULL STACK DEVELOPMENT</span>
+          <span>
+            FULL STACK DEVELOPMENT
+          </span>
+
           <b>✦</b>
 
-          <span>CREATIVE TECHNOLOGY</span>
+          <span>
+            CREATIVE TECHNOLOGY
+          </span>
+
           <b>✦</b>
 
-          <span>AI / MACHINE LEARNING</span>
+
+          <span>
+            AI / MACHINE LEARNING
+          </span>
+
           <b>✦</b>
 
-          <span>FULL STACK DEVELOPMENT</span>
+          <span>
+            FULL STACK DEVELOPMENT
+          </span>
+
           <b>✦</b>
 
-          <span>CREATIVE TECHNOLOGY</span>
+          <span>
+            CREATIVE TECHNOLOGY
+          </span>
+
           <b>✦</b>
 
         </div>
 
       </div>
 
+
+      <!-- SCROLL -->
 
       <a
         href="#about"
@@ -392,9 +502,10 @@
     </section>
 
 
-    <!-- =========================================
+
+    <!-- =======================================
          ABOUT
-    ========================================== -->
+    ======================================== -->
 
     <section
       id="about"
@@ -405,7 +516,9 @@
         02
       </div>
 
+
       <div class="container">
+
 
         <div class="section-header reveal">
 
@@ -414,20 +527,27 @@
           </div>
 
           <div>
+
             <span class="eyebrow">
               ABOUT ME
             </span>
 
             <h2>
               Turning ideas into
-              <em>digital reality.</em>
+              <em>
+                digital reality.
+              </em>
             </h2>
+
           </div>
 
         </div>
 
 
         <div class="about-layout">
+
+
+          <!-- VISUAL -->
 
           <div
             class="about-visual"
@@ -443,6 +563,7 @@
                 </span>
 
                 <div class="portrait-caption">
+
                   <span>
                     MEHUL VASAVA
                   </span>
@@ -450,6 +571,7 @@
                   <span>
                     BSc IT
                   </span>
+
                 </div>
 
               </div>
@@ -466,7 +588,10 @@
           </div>
 
 
+          <!-- CONTENT -->
+
           <div class="about-content">
+
 
             <div class="about-lead reveal">
 
@@ -475,10 +600,10 @@
               </span>
 
               <p>
-                I am a BSc IT student focused on
-                building practical digital products
-                using Machine Learning, Data Science,
-                Python and Full Stack Development.
+                I am a BSc IT student focused on building
+                practical digital products using Machine
+                Learning, Data Science, Python and Full Stack
+                Development.
               </p>
 
             </div>
@@ -488,21 +613,21 @@
 
               <p>
                 I enjoy transforming ideas into useful
-                experiences by combining technology,
-                clean interfaces and thoughtful
-                interactions.
+                experiences by combining technology, clean
+                interfaces and thoughtful interactions.
               </p>
 
               <p>
-                My goal is to continuously learn,
-                experiment and create projects that
-                solve real-world problems.
+                My goal is to continuously learn, experiment
+                and create projects that solve real-world
+                problems.
               </p>
 
             </div>
 
 
             <div class="about-stats reveal">
+
 
               <div class="about-stat">
 
@@ -516,6 +641,7 @@
 
               </div>
 
+
               <div class="about-stat">
 
                 <strong>
@@ -527,6 +653,7 @@
                 </span>
 
               </div>
+
 
               <div class="about-stat">
 
@@ -551,9 +678,10 @@
     </section>
 
 
-    <!-- =========================================
+
+    <!-- =======================================
          SKILLS
-    ========================================== -->
+    ======================================== -->
 
     <section
       id="skills"
@@ -562,7 +690,9 @@
 
       <div class="skills-light"></div>
 
+
       <div class="container">
+
 
         <div class="section-header dark-header reveal">
 
@@ -578,7 +708,9 @@
 
             <h2>
               Tools I use to
-              <em>build.</em>
+              <em>
+                build.
+              </em>
             </h2>
 
           </div>
@@ -589,7 +721,7 @@
         <div class="skills-grid">
 
 
-          <!-- Programming -->
+          <!-- PROGRAMMING -->
 
           <article
             class="skill-card reveal tilt-card"
@@ -608,15 +740,23 @@
             </h3>
 
             <p>
-              Building logic, applications and
-              data-driven solutions.
+              Building logic, applications and data-driven
+              solutions.
             </p>
 
             <div class="skill-list">
 
-              <span>Python</span>
-              <span>JavaScript</span>
-              <span>C / C++</span>
+              <span>
+                Python
+              </span>
+
+              <span>
+                JavaScript
+              </span>
+
+              <span>
+                C / C++
+              </span>
 
             </div>
 
@@ -627,7 +767,7 @@
           </article>
 
 
-          <!-- Web -->
+          <!-- WEB -->
 
           <article
             class="skill-card reveal tilt-card"
@@ -646,15 +786,23 @@
             </h3>
 
             <p>
-              Creating responsive and interactive
-              digital experiences.
+              Creating responsive and interactive digital
+              experiences.
             </p>
 
             <div class="skill-list">
 
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>JavaScript</span>
+              <span>
+                HTML
+              </span>
+
+              <span>
+                CSS
+              </span>
+
+              <span>
+                JavaScript
+              </span>
 
             </div>
 
@@ -665,7 +813,7 @@
           </article>
 
 
-          <!-- AI -->
+          <!-- AI ML -->
 
           <article
             class="skill-card reveal tilt-card"
@@ -684,15 +832,23 @@
             </h3>
 
             <p>
-              Exploring intelligent systems,
-              prediction and data science.
+              Exploring intelligent systems, prediction and
+              data science.
             </p>
 
             <div class="skill-list">
 
-              <span>Machine Learning</span>
-              <span>Data Science</span>
-              <span>Python</span>
+              <span>
+                Machine Learning
+              </span>
+
+              <span>
+                Data Science
+              </span>
+
+              <span>
+                Python
+              </span>
 
             </div>
 
@@ -703,7 +859,7 @@
           </article>
 
 
-          <!-- Database -->
+          <!-- DATABASE -->
 
           <article
             class="skill-card reveal tilt-card"
@@ -722,15 +878,23 @@
             </h3>
 
             <p>
-              Working with structured data and
-              application storage.
+              Working with structured data and application
+              storage.
             </p>
 
             <div class="skill-list">
 
-              <span>MongoDB</span>
-              <span>SQL</span>
-              <span>Data Handling</span>
+              <span>
+                MongoDB
+              </span>
+
+              <span>
+                SQL
+              </span>
+
+              <span>
+                Data Handling
+              </span>
 
             </div>
 
@@ -740,26 +904,64 @@
 
           </article>
 
+
         </div>
 
+
+        <!-- SKILLS MARQUEE -->
 
         <div class="skills-marquee">
 
           <div class="skills-marquee-track">
 
-            <span>PYTHON</span>
-            <span>JAVASCRIPT</span>
-            <span>MACHINE LEARNING</span>
-            <span>DATA SCIENCE</span>
-            <span>MONGODB</span>
-            <span>FULL STACK</span>
+            <span>
+              PYTHON
+            </span>
 
-            <span>PYTHON</span>
-            <span>JAVASCRIPT</span>
-            <span>MACHINE LEARNING</span>
-            <span>DATA SCIENCE</span>
-            <span>MONGODB</span>
-            <span>FULL STACK</span>
+            <span>
+              JAVASCRIPT
+            </span>
+
+            <span>
+              MACHINE LEARNING
+            </span>
+
+            <span>
+              DATA SCIENCE
+            </span>
+
+            <span>
+              MONGODB
+            </span>
+
+            <span>
+              FULL STACK
+            </span>
+
+
+            <span>
+              PYTHON
+            </span>
+
+            <span>
+              JAVASCRIPT
+            </span>
+
+            <span>
+              MACHINE LEARNING
+            </span>
+
+            <span>
+              DATA SCIENCE
+            </span>
+
+            <span>
+              MONGODB
+            </span>
+
+            <span>
+              FULL STACK
+            </span>
 
           </div>
 
@@ -770,9 +972,10 @@
     </section>
 
 
-    <!-- =========================================
+
+    <!-- =======================================
          PROJECTS
-    ========================================== -->
+    ======================================== -->
 
     <section
       id="projects"
@@ -781,7 +984,9 @@
 
       <div class="projects-glow"></div>
 
+
       <div class="container">
+
 
         <div class="section-header reveal">
 
@@ -797,7 +1002,9 @@
 
             <h2>
               Projects built with
-              <em>purpose.</em>
+              <em>
+                purpose.
+              </em>
             </h2>
 
           </div>
@@ -808,9 +1015,8 @@
         <div class="projects-intro reveal">
 
           <p>
-            A selection of projects where
-            development, problem solving and
-            intelligent technology meet.
+            A selection of projects where development,
+            problem solving and intelligent technology meet.
           </p>
 
           <span>
@@ -823,7 +1029,7 @@
         <div class="projects-stack">
 
 
-          <!-- PROJECT 01 -->
+          <!-- PROJECT 1 -->
 
           <article
             class="project-card project-one reveal"
@@ -833,13 +1039,16 @@
               01
             </div>
 
+
             <div class="project-visual">
 
               <div class="project-glow"></div>
 
+
               <div class="project-ui">
 
                 <div class="ui-top">
+
                   <span>
                     STUDENT
                   </span>
@@ -847,11 +1056,14 @@
                   <span>
                     PREDICTION
                   </span>
+
                 </div>
+
 
                 <div class="prediction-circle">
 
                   <div>
+
                     <strong>
                       87%
                     </strong>
@@ -859,15 +1071,20 @@
                     <span>
                       PERFORMANCE
                     </span>
+
                   </div>
 
                 </div>
 
+
                 <div class="ui-bars">
 
                   <span style="--bar: 82%"></span>
+
                   <span style="--bar: 65%"></span>
+
                   <span style="--bar: 91%"></span>
+
                   <span style="--bar: 74%"></span>
 
                 </div>
@@ -884,26 +1101,37 @@
               </span>
 
               <h3>
-                Student Performance
-                Prediction
+                Student Performance Prediction
               </h3>
 
               <p>
-                A machine learning project designed
-                to predict student performance using
-                relevant academic data.
+                A machine learning project designed to
+                predict student performance using relevant
+                academic data.
               </p>
+
 
               <div class="project-tags">
 
-                <span>Python</span>
-                <span>ML</span>
-                <span>Data</span>
+                <span>
+                  Python
+                </span>
+
+                <span>
+                  ML
+                </span>
+
+                <span>
+                  Data
+                </span>
 
               </div>
 
+
               <div class="project-arrow">
+
                 <i class="fa-solid fa-arrow-up-right"></i>
+
               </div>
 
             </div>
@@ -911,7 +1139,8 @@
           </article>
 
 
-          <!-- PROJECT 02 -->
+
+          <!-- PROJECT 2 -->
 
           <article
             class="project-card project-two reveal"
@@ -921,19 +1150,24 @@
               02
             </div>
 
+
             <div class="project-visual">
 
               <div class="loan-grid"></div>
 
+
               <div class="loan-dashboard">
 
                 <div class="loan-header">
+
                   <span>
                     LOAN ANALYSIS
                   </span>
 
                   <i class="fa-solid fa-chart-line"></i>
+
                 </div>
+
 
                 <div class="loan-score">
 
@@ -946,6 +1180,7 @@
                   </span>
 
                 </div>
+
 
                 <div class="loan-data">
 
@@ -968,26 +1203,37 @@
               </span>
 
               <h3>
-                Loan Approval
-                Prediction
+                Loan Approval Prediction
               </h3>
 
               <p>
-                A predictive model that explores
-                applicant information to determine
-                potential loan approval outcomes.
+                A predictive model that explores applicant
+                information to determine potential loan
+                approval outcomes.
               </p>
+
 
               <div class="project-tags">
 
-                <span>Python</span>
-                <span>ML</span>
-                <span>Prediction</span>
+                <span>
+                  Python
+                </span>
+
+                <span>
+                  ML
+                </span>
+
+                <span>
+                  Prediction
+                </span>
 
               </div>
 
+
               <div class="project-arrow">
+
                 <i class="fa-solid fa-arrow-up-right"></i>
+
               </div>
 
             </div>
@@ -1002,9 +1248,10 @@
     </section>
 
 
-    <!-- =========================================
+
+    <!-- =======================================
          EDUCATION
-    ========================================== -->
+    ======================================== -->
 
     <section
       id="education"
@@ -1015,7 +1262,9 @@
         EDUCATION
       </div>
 
+
       <div class="container">
+
 
         <div class="section-header dark-header reveal">
 
@@ -1031,7 +1280,9 @@
 
             <h2>
               Learning never
-              <em>stops.</em>
+              <em>
+                stops.
+              </em>
             </h2>
 
           </div>
@@ -1048,6 +1299,8 @@
 
           </div>
 
+
+          <!-- EDUCATION 1 -->
 
           <article class="timeline-item reveal">
 
@@ -1070,15 +1323,17 @@
               </h3>
 
               <p>
-                Building a strong foundation in
-                programming, software development,
-                databases and information technology.
+                Building a strong foundation in programming,
+                software development, databases and
+                information technology.
               </p>
 
             </div>
 
           </article>
 
+
+          <!-- EDUCATION 2 -->
 
           <article class="timeline-item reveal">
 
@@ -1101,15 +1356,17 @@
               </h3>
 
               <p>
-                Developing practical knowledge in
-                Python, Machine Learning, Data Science
-                and predictive models.
+                Developing practical knowledge in Python,
+                Machine Learning, Data Science and
+                predictive models.
               </p>
 
             </div>
 
           </article>
 
+
+          <!-- EDUCATION 3 -->
 
           <article class="timeline-item reveal">
 
@@ -1132,14 +1389,15 @@
               </h3>
 
               <p>
-                Learning modern web development and
-                building complete digital applications
-                from frontend to backend.
+                Learning modern web development and building
+                complete digital applications from frontend
+                to backend.
               </p>
 
             </div>
 
           </article>
+
 
         </div>
 
@@ -1148,9 +1406,10 @@
     </section>
 
 
-    <!-- =========================================
+
+    <!-- =======================================
          CONTACT
-    ========================================== -->
+    ======================================== -->
 
     <section
       id="contact"
@@ -1161,7 +1420,11 @@
 
       <div class="contact-glow"></div>
 
+
       <div class="container contact-container">
+
+
+        <!-- CONTACT TOP -->
 
         <div class="contact-top reveal">
 
@@ -1176,21 +1439,30 @@
         </div>
 
 
+        <!-- CONTACT MAIN -->
+
         <div class="contact-main">
+
 
           <span class="eyebrow reveal">
             HAVE AN IDEA?
           </span>
 
+
           <h2 class="contact-title reveal">
 
             Let's build
+
             <br>
 
-            <em>something meaningful.</em>
+            <em>
+              something meaningful.
+            </em>
 
           </h2>
 
+
+          <!-- EMAIL -->
 
           <a
             href="mailto:mv3453215@gmail.com"
@@ -1206,7 +1478,10 @@
           </a>
 
 
+          <!-- SOCIAL -->
+
           <div class="contact-socials reveal">
+
 
             <a
               href="https://github.com/vm946"
@@ -1214,9 +1489,15 @@
               rel="noopener noreferrer"
               class="social-link"
             >
-              <span>GITHUB</span>
+
+              <span>
+                GITHUB
+              </span>
+
               <i class="fa-brands fa-github"></i>
+
             </a>
+
 
             <a
               href="https://www.linkedin.com/"
@@ -1224,9 +1505,15 @@
               rel="noopener noreferrer"
               class="social-link"
             >
-              <span>LINKEDIN</span>
+
+              <span>
+                LINKEDIN
+              </span>
+
               <i class="fa-brands fa-linkedin-in"></i>
+
             </a>
+
 
             <a
               href="https://www.instagram.com/v_m_119/"
@@ -1234,16 +1521,25 @@
               rel="noopener noreferrer"
               class="social-link"
             >
-              <span>INSTAGRAM</span>
+
+              <span>
+                INSTAGRAM
+              </span>
+
               <i class="fa-brands fa-instagram"></i>
+
             </a>
+
 
           </div>
 
         </div>
 
 
+        <!-- FOOTER -->
+
         <div class="contact-bottom">
+
 
           <div>
 
@@ -1257,19 +1553,23 @@
 
           </div>
 
+
           <div class="footer-mark">
             MV
           </div>
 
+
           <div class="copyright">
             © 2026 VM
           </div>
+
 
         </div>
 
       </div>
 
     </section>
+
 
   </main>
 
@@ -1283,9 +1583,15 @@
     id="backTop"
     aria-label="Back to top"
   >
+
     <i class="fa-solid fa-arrow-up"></i>
+
   </button>
 
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
 
   <script src="script.js"></script>
 
