@@ -3764,3 +3764,53 @@ body.cursor-hover .cursor-ring {
     display: none;
   }
 }
+/* =========================================
+   SIMPLE PROFESSIONAL NAME
+========================================= */
+
+.hero-title {
+  margin: 0;
+  position: relative;
+  z-index: 5;
+
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(3.8rem, 9vw, 8.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+
+  color: #f2f0e6;
+  text-transform: uppercase;
+
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.hero-title-line {
+  display: block;
+  color: #f2f0e6;
+
+  margin-left: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-title:hover .hero-title-line {
+  opacity: 0.85;
+}
+
+/* Remove old outline styling */
+.hero-title-outline {
+  color: inherit;
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+  margin-left: 0;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+
+  .hero-title {
+    font-size: clamp(3rem, 14vw, 5rem);
+    letter-spacing: -0.045em;
+  }
+
+}
