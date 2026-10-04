@@ -1,1231 +1,740 @@
 /* =========================================================
-   MEHUL VASAVA
-   ADVANCED ANIMATION SYSTEM
+   MEHUL VASAVA — LUXURY PORTFOLIO
    ========================================================= */
 
-(() => {
-
-  "use strict";
+"use strict";
 
 
-  /* =====================================================
-     BASIC SELECTORS
-     ===================================================== */
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
-  const $ = (selector) =>
-    document.querySelector(selector);
+const select = (selector, parent = document) =>
+  parent.querySelector(selector);
 
+const selectAll = (selector, parent = document) =>
+  [...parent.querySelectorAll(selector)];
 
-  const $$ = (selector) =>
-    [...document.querySelectorAll(selector)];
-
-
-  const reduceMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+const reducedMotion =
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
 
-  /* =====================================================
-     NAVIGATION
-     ===================================================== */
+/* =========================================================
+   PRELOADER
+   ========================================================= */
 
-  const navbar =
-    $(".navbar");
+window.addEventListener("load", () => {
 
-  const menuBtn =
-    $(".menu-btn");
+  const preloader =
+    select("#preloader");
+
+  setTimeout(() => {
+
+    if (preloader) {
+      preloader.classList.add("hide");
+    }
+
+  }, 1400);
+
+});
 
 
-  if (menuBtn) {
+/* =========================================================
+   DOM
+   ========================================================= */
 
-    menuBtn.addEventListener(
-      "click",
-      () => {
+const header =
+  select("#siteHeader");
 
-        const open =
-          navbar.classList.toggle(
-            "nav-open"
-          );
+const menuToggle =
+  select("#menuToggle");
 
-        menuBtn.setAttribute(
-          "aria-expanded",
-          String(open)
-        );
+const navMenu =
+  select("#navMenu");
 
-      }
+const navLinks =
+  selectAll(".nav-link");
+
+const progress =
+  select("#scrollProgress");
+
+const backTop =
+  select("#backTop");
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+   ========================================================= */
+
+if (menuToggle && navMenu) {
+
+  menuToggle.addEventListener("click", () => {
+
+    const opened =
+      navMenu.classList.toggle("open");
+
+    document.body.classList.toggle(
+      "menu-open",
+      opened
+    );
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      opened
+    );
+
+  });
+
+}
+
+
+navLinks.forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    navMenu?.classList.remove("open");
+
+    document.body.classList.remove(
+      "menu-open"
+    );
+
+    menuToggle?.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  });
+
+});
+
+
+/* =========================================================
+   SMOOTH SCROLL
+   ========================================================= */
+
+selectAll('a[href^="#"]').forEach(link => {
+
+  link.addEventListener("click", event => {
+
+    const targetID =
+      link.getAttribute("href");
+
+    if (
+      !targetID ||
+      targetID === "#"
+    ) {
+      return;
+    }
+
+    const target =
+      select(targetID);
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const offset = 75;
+
+    const targetPosition =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      offset;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: reducedMotion
+        ? "auto"
+        : "smooth"
+    });
+
+  });
+
+});
+
+
+/* =========================================================
+   SCROLL STATE
+   ========================================================= */
+
+let ticking = false;
+
+function updateScroll() {
+
+  const scrollY =
+    window.scrollY;
+
+  const documentHeight =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
+
+  const percentage =
+    documentHeight > 0
+      ? (scrollY / documentHeight) * 100
+      : 0;
+
+  if (progress) {
+
+    progress.style.width =
+      `${percentage}%`;
+
+  }
+
+
+  /* Header */
+
+  if (header) {
+
+    header.classList.toggle(
+      "scrolled",
+      scrollY > 50
     );
 
   }
 
 
-  $$(".navbar nav a").forEach(
-    (link) => {
+  /* Back to top */
 
-      link.addEventListener(
-        "click",
-        () => {
+  if (backTop) {
 
-          navbar.classList.remove(
-            "nav-open"
-          );
+    backTop.classList.toggle(
+      "show",
+      scrollY > window.innerHeight
+    );
 
-          menuBtn?.setAttribute(
-            "aria-expanded",
-            "false"
-          );
+  }
 
-        }
+
+  /* Hero parallax */
+
+  if (!reducedMotion) {
+
+    updateHeroParallax();
+
+    updateGlobalParallax();
+
+  }
+
+  ticking = false;
+}
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!ticking) {
+
+      requestAnimationFrame(
+        updateScroll
       );
 
+      ticking = true;
+
     }
-  );
+
+  },
+  { passive: true }
+);
 
 
-  /* =====================================================
-     SCROLL PROGRESS
-     ===================================================== */
+/* =========================================================
+   HERO PARALLAX
+   ========================================================= */
+
+function updateHeroParallax() {
+
+  const hero =
+    select(".hero-section");
+
+  if (!hero) {
+    return;
+  }
+
+  const scroll =
+    window.scrollY;
+
+  const height =
+    hero.offsetHeight;
+
+  if (scroll > height) {
+    return;
+  }
 
   const progress =
-    $(".progress");
+    Math.min(scroll / height, 1);
 
 
-  const sections =
-    $$("main section[id]");
+  /* Main title */
 
+  selectAll(
+    ".hero-title-line"
+  ).forEach(line => {
 
-  const navLinks =
-    $$(".navbar nav a");
-
-
-  function updateScroll() {
-
-    const maxScroll =
-      document.documentElement.scrollHeight -
-      window.innerHeight;
-
-
-    const percentage =
-      maxScroll > 0
-        ? (window.scrollY / maxScroll) * 100
-        : 0;
-
-
-    if (progress) {
-
-      progress.style.width =
-        `${percentage}%`;
-
-    }
-
-
-    if (navbar) {
-
-      navbar.classList.toggle(
-        "scrolled",
-        window.scrollY > 30
+    const speed =
+      parseFloat(
+        line.dataset.speed || 0
       );
 
-    }
+    line.style.transform =
+      `translate3d(
+        0,
+        ${scroll * speed * 1.5}px,
+        0
+      )`;
+
+    line.style.opacity =
+      `${1 - progress * .55}`;
+
+  });
 
 
-    let current =
-      "home";
+  /* Intro */
 
+  const intro =
+    select(".hero-intro");
 
-    sections.forEach(
-      (section) => {
+  if (intro) {
 
-        if (
-          window.scrollY >=
-          section.offsetTop -
-          window.innerHeight * .35
-        ) {
+    intro.style.transform =
+      `translate3d(
+        ${-progress * 70}px,
+        ${progress * -20}px,
+        0
+      )`;
 
-          current =
-            section.id;
-
-        }
-
-      }
-    );
-
-
-    navLinks.forEach(
-      (link) => {
-
-        link.classList.toggle(
-          "active",
-          link.getAttribute("href") ===
-          `#${current}`
-        );
-
-      }
-    );
-
+    intro.style.opacity =
+      `${1 - progress}`;
   }
 
 
-  window.addEventListener(
-    "scroll",
-    updateScroll,
-    { passive: true }
+  /* Description */
+
+  const description =
+    select(".hero-bottom");
+
+  if (description) {
+
+    description.style.transform =
+      `translate3d(
+        0,
+        ${progress * 80}px,
+        0
+      )`;
+
+    description.style.opacity =
+      `${1 - progress * .8}`;
+  }
+
+
+  /* Hero visual */
+
+  const visual =
+    select(".hero-visual");
+
+  if (visual) {
+
+    const scale =
+      1 - progress * .08;
+
+    visual.style.transform =
+      `translate3d(
+        0,
+        calc(-43% + ${scroll * .08}px),
+        0
+      )
+      scale(${scale})`;
+
+  }
+
+}
+
+
+/* =========================================================
+   GLOBAL PARALLAX
+   ========================================================= */
+
+function updateGlobalParallax() {
+
+  selectAll(
+    "[data-parallax]"
+  ).forEach(element => {
+
+    const rect =
+      element.getBoundingClientRect();
+
+    const speed =
+      parseFloat(
+        element.dataset.parallax || 0
+      );
+
+    const center =
+      window.innerHeight / 2;
+
+    const distance =
+      rect.top -
+      center;
+
+    const movement =
+      distance * speed;
+
+    element.style.transform =
+      `translate3d(
+        0,
+        ${movement}px,
+        0
+      )`;
+
+  });
+
+}
+
+
+/* =========================================================
+   REVEAL OBSERVER
+   ========================================================= */
+
+const revealObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add(
+            "visible"
+          );
+
+          revealObserver.unobserve(
+            entry.target
+          );
+
+        }
+
+      });
+
+    },
+    {
+      threshold: .12,
+      rootMargin: "0px 0px -60px 0px"
+    }
   );
 
 
-  updateScroll();
+selectAll(".reveal").forEach(
+  element => {
 
+    if (reducedMotion) {
 
-  /* =====================================================
-     SCROLL REVEAL
-     ===================================================== */
-
-  const revealElements =
-    $$(".reveal");
-
-
-  if (reduceMotion) {
-
-    revealElements.forEach(
-      element =>
-        element.classList.add(
-          "is-visible"
-        )
-    );
-
-  }
-
-  else {
-
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
-
-          entries.forEach(
-            (entry) => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                entry.target.classList.add(
-                  "is-visible"
-                );
-
-                observer.unobserve(
-                  entry.target
-                );
-
-              }
-
-            }
-          );
-
-        },
-        {
-          threshold: .12,
-
-          rootMargin:
-            "0px 0px -40px"
-        }
+      element.classList.add(
+        "visible"
       );
 
+    } else {
 
-    revealElements.forEach(
-      element =>
-        observer.observe(element)
-    );
+      revealObserver.observe(
+        element
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SKILL METERS
+   ========================================================= */
+
+const skillCards =
+  selectAll(".skill-card");
+
+const skillObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const card =
+          entry.target;
+
+        const meter =
+          select(
+            ".skill-line span",
+            card
+          );
+
+        if (meter) {
+
+          const width =
+            meter.dataset.width ||
+            "80%";
+
+          meter.style.setProperty(
+            "--skill-width",
+            width
+          );
+
+        }
+
+        card.classList.add(
+          "visible"
+        );
+
+        skillObserver.unobserve(
+          card
+        );
+
+      });
+
+    },
+    {
+      threshold: .3
+    }
+  );
+
+
+skillCards.forEach(card => {
+
+  if (reducedMotion) {
+
+    const meter =
+      select(
+        ".skill-line span",
+        card
+      );
+
+    if (meter) {
+
+      meter.style.setProperty(
+        "--skill-width",
+        meter.dataset.width || "80%"
+      );
+
+    }
+
+    card.classList.add("visible");
+
+  } else {
+
+    skillObserver.observe(card);
 
   }
 
-
-  /* =====================================================
-     SKILL BAR ANIMATION
-     ===================================================== */
-
-  const meters =
-    $$(".meter i");
+});
 
 
-  const meterObserver =
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+const timeline =
+  select(".timeline");
+
+if (timeline) {
+
+  const timelineObserver =
     new IntersectionObserver(
-      (entries) => {
+      entries => {
 
-        entries.forEach(
-          (entry) => {
+        entries.forEach(entry => {
 
-            if (
-              !entry.isIntersecting
-            ) {
+          if (entry.isIntersecting) {
 
-              return;
-
-            }
-
-
-            const width =
-              entry.target.dataset.width ||
-              "0";
-
-
-            entry.target.style.width =
-              `${width}%`;
-
-
-            meterObserver.unobserve(
-              entry.target
+            timeline.classList.add(
+              "active"
             );
 
           }
-        );
+
+        });
 
       },
       {
-        threshold: .5
+        threshold: .15
       }
     );
 
-
-  meters.forEach(
-    meter =>
-      meterObserver.observe(meter)
+  timelineObserver.observe(
+    timeline
   );
 
-
-  /* =====================================================
-     SMOOTH SCROLL
-     ===================================================== */
-
-  $$('a[href^="#"]').forEach(
-    (link) => {
-
-      link.addEventListener(
-        "click",
-        (event) => {
-
-          const target =
-            $(link.getAttribute("href"));
+}
 
 
-          if (!target) {
+/* =========================================================
+   TIMELINE ITEM OBSERVER
+   ========================================================= */
 
-            return;
+selectAll(
+  ".timeline-item"
+).forEach(item => {
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (
+            entry.isIntersecting
+          ) {
+
+            item.classList.add(
+              "visible"
+            );
+
+            observer.unobserve(item);
 
           }
 
-
-          event.preventDefault();
-
-
-          target.scrollIntoView({
-
-            behavior:
-              reduceMotion
-                ? "auto"
-                : "smooth",
-
-            block:
-              "start"
-
-          });
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =====================================================
-     CURSOR
-     ===================================================== */
-
-  const cursorGlow =
-    $(".cursor-glow");
-
-
-  const cursorTrail =
-    $("#cursorTrail");
-
-
-  let mouseX =
-    window.innerWidth / 2;
-
-
-  let mouseY =
-    window.innerHeight / 2;
-
-
-  let trailX =
-    mouseX;
-
-
-  let trailY =
-    mouseY;
-
-
-  if (
-    !reduceMotion &&
-    window.matchMedia(
-      "(pointer:fine)"
-    ).matches
-  ) {
-
-
-    window.addEventListener(
-      "pointermove",
-      (event) => {
-
-        mouseX =
-          event.clientX;
-
-        mouseY =
-          event.clientY;
-
-
-        if (cursorGlow) {
-
-          cursorGlow.style.opacity =
-            "1";
-
-        }
+        });
 
       },
-      { passive: true }
-    );
-
-
-    function cursorAnimation() {
-
-      trailX +=
-        (mouseX - trailX) *
-        .16;
-
-
-      trailY +=
-        (mouseY - trailY) *
-        .16;
-
-
-      if (cursorGlow) {
-
-        cursorGlow.style.left =
-          `${mouseX}px`;
-
-        cursorGlow.style.top =
-          `${mouseY}px`;
-
-      }
-
-
-      if (cursorTrail) {
-
-        cursorTrail.style.left =
-          `${trailX}px`;
-
-        cursorTrail.style.top =
-          `${trailY}px`;
-
-      }
-
-
-      requestAnimationFrame(
-        cursorAnimation
-      );
-
-    }
-
-
-    cursorAnimation();
-
-  }
-
-
-  /* =====================================================
-     3D CARD TILT
-     ===================================================== */
-
-  if (
-    !reduceMotion &&
-    window.matchMedia(
-      "(pointer:fine)"
-    ).matches
-  ) {
-
-
-    $$(".tilt").forEach(
-      (card) => {
-
-
-        card.addEventListener(
-          "pointermove",
-          (event) => {
-
-            const rect =
-              card.getBoundingClientRect();
-
-
-            const x =
-              (event.clientX -
-                rect.left) /
-              rect.width -
-              .5;
-
-
-            const y =
-              (event.clientY -
-                rect.top) /
-              rect.height -
-              .5;
-
-
-            const rotateX =
-              -y * 7;
-
-
-            const rotateY =
-              x * 9;
-
-
-            card.style.transform =
-              `perspective(900px)
-               rotateX(${rotateX}deg)
-               rotateY(${rotateY}deg)
-               translateY(-6px)`;
-
-          }
-        );
-
-
-        card.addEventListener(
-          "pointerleave",
-          () => {
-
-            card.style.transform =
-              "";
-
-          }
-        );
-
+      {
+        threshold: .3
       }
     );
 
-  }
+  observer.observe(item);
+
+});
 
 
-  /* =====================================================
-     MAGNETIC BUTTONS
-     ===================================================== */
+/* =========================================================
+   3D TILT CARDS
+   ========================================================= */
 
-  if (
-    !reduceMotion &&
-    window.matchMedia(
-      "(pointer:fine)"
-    ).matches
-  ) {
+if (!reducedMotion) {
 
+  selectAll(
+    ".tilt-card"
+  ).forEach(card => {
 
-    $$(".magnetic").forEach(
-      (button) => {
+    card.addEventListener(
+      "mousemove",
+      event => {
 
-
-        button.addEventListener(
-          "pointermove",
-          (event) => {
-
-            const rect =
-              button.getBoundingClientRect();
-
-
-            const x =
-              event.clientX -
-              rect.left -
-              rect.width / 2;
-
-
-            const y =
-              event.clientY -
-              rect.top -
-              rect.height / 2;
-
-
-            button.style.transform =
-              `translate(
-                ${x * .08}px,
-                ${y * .08}px
-              )`;
-
-          }
-        );
-
-
-        button.addEventListener(
-          "pointerleave",
-          () => {
-
-            button.style.transform =
-              "";
-
-          }
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =====================================================
-     HERO PARALLAX
-     ===================================================== */
-
-  const hero =
-    $(".hero");
-
-
-  const heroContent =
-    $(".hero-content");
-
-
-  const heroOrbit =
-    $(".hero-orbit");
-
-
-  if (
-    hero &&
-    !reduceMotion &&
-    window.matchMedia(
-      "(pointer:fine)"
-    ).matches
-  ) {
-
-
-    window.addEventListener(
-      "pointermove",
-      (event) => {
+        const rect =
+          card.getBoundingClientRect();
 
         const x =
-          event.clientX /
-          window.innerWidth -
-          .5;
-
+          event.clientX -
+          rect.left;
 
         const y =
-          event.clientY /
-          window.innerHeight -
-          .5;
+          event.clientY -
+          rect.top;
 
+        const centerX =
+          rect.width / 2;
 
-        if (heroContent) {
+        const centerY =
+          rect.height / 2;
 
-          heroContent.style.transform =
-            `translate3d(
-              ${x * -8}px,
-              ${y * -6}px,
-              0
-            )`;
+        const rotateX =
+          ((y - centerY) /
+            centerY) *
+          -4;
 
-        }
+        const rotateY =
+          ((x - centerX) /
+            centerX) *
+          4;
 
+        card.style.transform =
+          `perspective(900px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-5px)`;
 
-        if (heroOrbit) {
-
-          heroOrbit.style.transform =
-            `translate3d(
-              ${x * 14}px,
-              ${y * 10}px,
-              0
-            )`;
-
-        }
-
-      },
-      { passive: true }
+      }
     );
 
-  }
+    card.addEventListener(
+      "mouseleave",
+      () => {
 
-
-  /* =====================================================
-     FLOATING PARTICLES
-     ===================================================== */
-
-  const particleContainer =
-    $(".hero-particles");
-
-
-  if (
-    particleContainer &&
-    !reduceMotion
-  ) {
-
-
-    const amount =
-      window.innerWidth < 700
-        ? 20
-        : 40;
-
-
-    for (
-      let i = 0;
-      i < amount;
-      i++
-    ) {
-
-
-      const particle =
-        document.createElement(
-          "span"
-        );
-
-
-      const size =
-        Math.random() * 3 + 2;
-
-
-      particle.style.position =
-        "absolute";
-
-
-      particle.style.width =
-        `${size}px`;
-
-
-      particle.style.height =
-        `${size}px`;
-
-
-      particle.style.left =
-        `${Math.random() * 100}%`;
-
-
-      particle.style.top =
-        `${Math.random() * 100}%`;
-
-
-      particle.style.borderRadius =
-        "50%";
-
-
-      particle.style.background =
-        "#5F6F52";
-
-
-      particle.style.opacity =
-        Math.random() * .35 + .12;
-
-
-      particle.style.animation =
-        `particleFloat
-         ${Math.random() * 8 + 8}s
-         ease-in-out
-         ${Math.random() * -8}s
-         infinite
-         alternate`;
-
-
-      particleContainer.appendChild(
-        particle
-      );
-
-    }
-
-
-    const particleStyle =
-      document.createElement(
-        "style"
-      );
-
-
-    particleStyle.textContent = `
-
-      @keyframes particleFloat {
-
-        from {
-
-          transform:
-            translate3d(0,0,0)
-            scale(.7);
-
-        }
-
-        to {
-
-          transform:
-            translate3d(
-              40px,
-              -90px,
-              0
-            )
-            scale(1.3);
-
-        }
+        card.style.transform = "";
 
       }
-
-    `;
-
-
-    document.head.appendChild(
-      particleStyle
     );
 
-  }
-
-
-  /* =====================================================
-     NEURAL NETWORK CANVAS
-     ===================================================== */
-
-  const canvas =
-    $("#neuralCanvas");
-
-
-  const ctx =
-    canvas?.getContext("2d");
-
-
-  if (
-    canvas &&
-    ctx &&
-    !reduceMotion
-  ) {
-
-
-    let nodes = [];
-
-    let width = 0;
-
-    let height = 0;
-
-
-    function resizeCanvas() {
-
-      const dpr =
-        Math.min(
-          window.devicePixelRatio || 1,
-          2
-        );
-
-
-      width =
-        canvas.clientWidth;
-
-
-      height =
-        canvas.clientHeight;
-
-
-      canvas.width =
-        width * dpr;
-
-
-      canvas.height =
-        height * dpr;
-
-
-      ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-      );
-
-
-      const count =
-        width < 700
-          ? 24
-          : 50;
-
-
-      nodes =
-        Array.from(
-          { length: count },
-          () => ({
-
-            x:
-              Math.random() *
-              width,
-
-            y:
-              Math.random() *
-              height,
-
-            vx:
-              (Math.random() - .5)
-              * .25,
-
-            vy:
-              (Math.random() - .5)
-              * .25,
-
-            r:
-              Math.random() * 1.8
-              + .8
-
-          })
-        );
-
-    }
-
-
-    resizeCanvas();
-
-
-    window.addEventListener(
-      "resize",
-      resizeCanvas,
-      { passive: true }
-    );
-
-
-    function drawNetwork() {
-
-      ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-      );
-
-
-      nodes.forEach(
-        (node) => {
-
-          node.x += node.vx;
-
-          node.y += node.vy;
-
-
-          if (
-            node.x < 0 ||
-            node.x > width
-          ) {
-
-            node.vx *= -1;
-
-          }
-
-
-          if (
-            node.y < 0 ||
-            node.y > height
-          ) {
-
-            node.vy *= -1;
-
-          }
-
-
-          ctx.beginPath();
-
-          ctx.arc(
-            node.x,
-            node.y,
-            node.r,
-            0,
-            Math.PI * 2
-          );
-
-
-          ctx.fillStyle =
-            "rgba(6,78,59,.42)";
-
-
-          ctx.fill();
-
-        }
-      );
-
-
-      for (
-        let i = 0;
-        i < nodes.length;
-        i++
-      ) {
-
-
-        for (
-          let j = i + 1;
-          j < nodes.length;
-          j++
-        ) {
-
-
-          const a =
-            nodes[i];
-
-
-          const b =
-            nodes[j];
-
-
-          const dx =
-            a.x - b.x;
-
-
-          const dy =
-            a.y - b.y;
-
-
-          const distance =
-            Math.hypot(
-              dx,
-              dy
-            );
-
-
-          if (
-            distance < 125
-          ) {
-
-
-            ctx.beginPath();
-
-
-            ctx.moveTo(
-              a.x,
-              a.y
-            );
-
-
-            ctx.lineTo(
-              b.x,
-              b.y
-            );
-
-
-            ctx.strokeStyle =
-              `rgba(
-                95,
-                111,
-                82,
-                ${(1 - distance / 125) * .16}
-              )`;
-
-
-            ctx.lineWidth =
-              .7;
-
-
-            ctx.stroke();
-
-          }
-
-        }
-
-      }
-
-
-      requestAnimationFrame(
-        drawNetwork
-      );
-
-    }
-
-
-    drawNetwork();
-
-  }
-
-
-  /* =====================================================
-     ESCAPE CLOSE MENU
-     ===================================================== */
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (
-        event.key === "Escape"
-      ) {
-
-        navbar?.classList.remove(
-          "nav-open"
-        );
-
-        menuBtn?.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      }
-
-    }
-  );
-
-
-})();
-/* =====================================================
-   LUXURY SCROLL ANIMATION
-===================================================== */
-
-const luxuryHome =
-  document.querySelector(".luxury-home");
-
-const luxuryTitle =
-  document.querySelector(".luxury-title");
-
-const luxuryObject =
-  document.querySelector(".luxury-object");
-
-const luxuryIntro =
-  document.querySelector(".luxury-intro");
-
-if (
-  luxuryHome &&
-  !window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches
-) {
-
-  let ticking = false;
-
-  function luxuryScrollAnimation() {
-
-    const scroll =
-      window.scrollY;
-
-    const homeHeight =
-      luxuryHome.offsetHeight;
-
-    const progress =
-      Math.min(
-        scroll / homeHeight,
-        1
-      );
-
-    /*
-      Title moves upward
-    */
-
-    if (luxuryTitle) {
-
-      luxuryTitle.style.transform =
-        `translate3d(
-          0,
-          ${progress * -100}px,
-          0
-        )`;
-
-      luxuryTitle.style.opacity =
-        `${1 - progress * .65}`;
-
-    }
-
-
-    /*
-      3D object moves slower
-    */
-
-    if (luxuryObject) {
-
-      luxuryObject.style.transform =
-        `translate3d(
-          0,
-          calc(-45% + ${progress * 80}px),
-          0
-        )
-        rotateY(${progress * 12}deg)`;
-
-    }
-
-
-    /*
-      Intro moves slightly
-    */
-
-    if (luxuryIntro) {
-
-      luxuryIntro.style.transform =
-        `translateX(
-          ${progress * -50}px
-        )`;
-
-      luxuryIntro.style.opacity =
-        `${1 - progress}`;
-
-    }
-
-
-    ticking = false;
-
-  }
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      if (!ticking) {
-
-        requestAnimationFrame(
-          luxuryScrollAnimation
-        );
-
-        ticking = true;
-
-      }
-
-    },
-    { passive: true }
-  );
+  });
 
 }
 
 
-/* =====================================================
-   LUXURY MOUSE PARALLAX
-===================================================== */
+/* =========================================================
+   PROJECT 3D EFFECT
+   ========================================================= */
 
-if (
-  luxuryHome &&
-  !window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches
-) {
+if (!reducedMotion) {
 
-  luxuryHome.addEventListener(
-    "mousemove",
-    event => {
+  selectAll(
+    ".project-card"
+  ).forEach(card => {
 
-      const x =
-        event.clientX /
-        window.innerWidth -
-        .5;
+    card.addEventListener(
+      "mousemove",
+      event => {
 
-      const y =
-        event.clientY /
-        window.innerHeight -
-        .5;
+        const rect =
+          card.getBoundingClientRect();
 
+        const x =
+          event.clientX -
+          rect.left;
 
-      if (luxuryObject) {
+        const y =
+          event.clientY -
+          rect.top;
 
-        luxuryObject.style.marginLeft =
-          `${x * 15}px`;
+        const rotateY =
+          ((x / rect.width) - .5) * 2;
 
-        luxuryObject.style.marginTop =
-          `${y * 15}px`;
+        const rotateX =
+          ((y / rect.height) - .5) * -2;
+
+        card.style.transform =
+          `perspective(1600px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)`;
 
       }
+    );
 
-    }
-  );
+    card.addEventListener(
+      "mouseleave",
+      () => {
+
+        card.style.transform = "";
+
+      }
+    );
+
+  });
 
 }
 
 
-/* =====================================================
-   MAGNETIC LUXURY BUTTONS
-===================================================== */
+/* =========================================================
+   MAGNETIC BUTTONS
+   ========================================================= */
 
-document
-  .querySelectorAll(".luxury-button")
-  .forEach(button => {
+if (!reducedMotion) {
+
+  selectAll(
+    ".magnetic"
+  ).forEach(button => {
 
     button.addEventListener(
       "mousemove",
@@ -1246,8 +755,8 @@ document
 
         button.style.transform =
           `translate(
-            ${x * .12}px,
-            ${y * .12}px
+            ${x * .13}px,
+            ${y * .13}px
           )`;
 
       }
@@ -1263,3 +772,333 @@ document
     );
 
   });
+
+}
+
+
+/* =========================================================
+   CURSOR
+   ========================================================= */
+
+if (
+  !reducedMotion &&
+  window.matchMedia(
+    "(pointer:fine)"
+  ).matches
+) {
+
+  const cursorDot =
+    select(".cursor-dot");
+
+  const cursorRing =
+    select(".cursor-ring");
+
+  let mouseX = 0;
+  let mouseY = 0;
+
+  let ringX = 0;
+  let ringY = 0;
+
+  window.addEventListener(
+    "mousemove",
+    event => {
+
+      mouseX =
+        event.clientX;
+
+      mouseY =
+        event.clientY;
+
+      if (cursorDot) {
+
+        cursorDot.style.left =
+          `${mouseX}px`;
+
+        cursorDot.style.top =
+          `${mouseY}px`;
+
+      }
+
+    }
+  );
+
+
+  function animateCursor() {
+
+    ringX +=
+      (mouseX - ringX) * .13;
+
+    ringY +=
+      (mouseY - ringY) * .13;
+
+    if (cursorRing) {
+
+      cursorRing.style.left =
+        `${ringX}px`;
+
+      cursorRing.style.top =
+        `${ringY}px`;
+
+    }
+
+    requestAnimationFrame(
+      animateCursor
+    );
+
+  }
+
+  animateCursor();
+
+
+  selectAll(
+    "a, button, .skill-card, .project-card"
+  ).forEach(element => {
+
+    element.addEventListener(
+      "mouseenter",
+      () => {
+
+        document.body.classList.add(
+          "cursor-hover"
+        );
+
+      }
+    );
+
+    element.addEventListener(
+      "mouseleave",
+      () => {
+
+        document.body.classList.remove(
+          "cursor-hover"
+        );
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+   ========================================================= */
+
+const sections =
+  selectAll("main section[id]");
+
+const sectionObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const id =
+          entry.target.id;
+
+        navLinks.forEach(link => {
+
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") ===
+            `#${id}`
+          );
+
+        });
+
+      });
+
+    },
+    {
+      threshold: .35
+    }
+  );
+
+
+sections.forEach(section => {
+
+  sectionObserver.observe(section);
+
+});
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+if (backTop) {
+
+  backTop.addEventListener(
+    "click",
+    () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: reducedMotion
+          ? "auto"
+          : "smooth"
+      });
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   HERO MOUSE PARALLAX
+   ========================================================= */
+
+if (
+  !reducedMotion &&
+  window.matchMedia(
+    "(pointer:fine)"
+  ).matches
+) {
+
+  const hero =
+    select(".hero-section");
+
+  const visual =
+    select(".hero-visual");
+
+  if (hero && visual) {
+
+    hero.addEventListener(
+      "mousemove",
+      event => {
+
+        const x =
+          event.clientX /
+          window.innerWidth -
+          .5;
+
+        const y =
+          event.clientY /
+          window.innerHeight -
+          .5;
+
+        const base =
+          window.scrollY;
+
+        visual.style.marginLeft =
+          `${x * 18}px`;
+
+        visual.style.marginTop =
+          `${y * 18}px`;
+
+        visual.dataset.mouseX =
+          x;
+
+        visual.dataset.mouseY =
+          y;
+
+      }
+    );
+
+    hero.addEventListener(
+      "mouseleave",
+      () => {
+
+        visual.style.marginLeft = "";
+        visual.style.marginTop = "";
+
+      }
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PROJECT SCROLL REVEAL
+   ========================================================= */
+
+const projectObserver =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const visual =
+          select(
+            ".project-visual",
+            entry.target
+          );
+
+        if (visual) {
+
+          visual.classList.add(
+            "project-visible"
+          );
+
+        }
+
+      });
+
+    },
+    {
+      threshold: .25
+    }
+  );
+
+
+selectAll(
+  ".project-card"
+).forEach(card => {
+
+  projectObserver.observe(card);
+
+});
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      navMenu?.classList.remove(
+        "open"
+      );
+
+      document.body.classList.remove(
+        "menu-open"
+      );
+
+      menuToggle?.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+updateScroll();
+
+console.log(
+  "Mehul Vasava — Luxury Portfolio initialized."
+);
