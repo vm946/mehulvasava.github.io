@@ -1,1345 +1,714 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <!-- ================= GOOGLE ANALYTICS ================= -->
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NW7KQBQSBW"></script>
-
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'G-NW7KQBQSBW');
-  </script>
-
-  <!-- ================= META ================= -->
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Mehul Vasava - BSc IT Student, AI/ML and Full Stack Developer Portfolio">
 
+  <title>Mehul Vasava | Portfolio</title>
 
-
-<meta
-name="description"
-content="Mehul Vasava — BSc IT student, Machine Learning and Full Stack Developer portfolio.">
-
-
-
-<meta
-name="author"
-content="Mehul Vasava">
-
-
-
-<meta
-name="theme-color"
-content="#0b0b0f">
-
-
-
-  <title>
-    Mehul Vasava | Portfolio
-  </title>
-
-  <!-- ================= GOOGLE FONTS ================= -->
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet"
   >
 
-  <!-- ================= FONT AWESOME ================= -->
-
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
-  <!-- ================= YOUR CSS ================= -->
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- =====================================================
-       GLOBAL EFFECTS
-       ===================================================== -->
+  <!-- Background -->
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
 
+  <!-- Cursor -->
   <div class="cursor-glow"></div>
+  <div id="cursorTrail"></div>
 
+  <!-- Scroll Progress -->
   <div class="progress"></div>
 
-  <!-- =====================================================
-       CINEMATIC CURSOR
-       ===================================================== -->
 
-  <div
-    id="cursorTrail"
-    aria-hidden="true">
-  </div>
-
-  <!-- =====================================================
-       NAVBAR
-       ===================================================== -->
+  <!-- ================= NAVBAR ================= -->
 
   <header class="navbar">
 
-<a
-  class="logo"
-  href="#home"
-  aria-label="Mehul Vasava Home"
->
+    <a href="#home" class="logo">
+      MV<span>.</span>
+    </a>
 
-  <span>
-    MV
-  </span>
+    <button
+      class="menu-btn"
+      aria-label="Open navigation"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-  <i>
-    .
-  </i>
+    <nav>
 
-</a>
+      <a href="#home" class="active">Home</a>
 
+      <a href="#about">About</a>
 
-<button
-  class="menu-btn"
-  aria-label="Toggle menu"
-  aria-expanded="false"
->
+      <a href="#skills">Skills</a>
 
-  <span></span>
+      <a href="#projects">Projects</a>
 
-  <span></span>
+      <a href="#education">Education</a>
 
-  <span></span>
+      <a href="#contact">Contact</a>
 
-</button>
-
-
-<nav>
-
-  <a
-    href="#home"
-    class="active"
-  >
-    Home
-  </a>
-
-  <a href="#about">
-    About
-  </a>
-
-  <a href="#skills">
-    Skills
-  </a>
-
-  <a href="#projects">
-    Projects
-  </a>
-
-  <a href="#education">
-    Education
-  </a>
-
-  <a href="#contact">
-    Contact
-  </a>
-
-</nav>
+    </nav>
 
   </header>
 
-  <!-- =====================================================
-       MAIN
-       ===================================================== -->
 
   <main>
 
-<!-- ===================================================
-     HOME / HERO
-     =================================================== -->
+    <!-- ================= HERO ================= -->
 
-<section
-  id="home"
-  class="hero"
->
+    <section id="home" class="hero">
 
+      <div class="hero-grid"></div>
 
-  <!-- Existing grid -->
+      <div class="hero-particles"></div>
 
-  <div class="hero-grid"></div>
+      <!-- Neural Network -->
+      <div class="ai-scene">
 
+        <canvas id="neuralCanvas"></canvas>
 
-  <!-- =================================================
-       LIVE PARTICLES
-       ================================================= -->
+        <div class="ai-sphere">
 
-  <div
-    class="hero-particles"
-    aria-hidden="true">
-  </div>
+          <div class="sphere-ring sphere-ring-1"></div>
+          <div class="sphere-ring sphere-ring-2"></div>
+          <div class="sphere-ring sphere-ring-3"></div>
 
+          <div class="sphere-core">
 
-  <!-- =================================================
-       CINEMATIC AI / ML SCENE
-       ================================================= -->
+            <span>AI</span>
+            <small>ML</small>
 
-  <div
-    class="ai-scene"
-    aria-hidden="true"
-  >
+          </div>
 
+          <div class="ai-node node-1"></div>
+          <div class="ai-node node-2"></div>
+          <div class="ai-node node-3"></div>
+          <div class="ai-node node-4"></div>
 
-    <!-- Neural Network Canvas -->
+          <div class="ai-node node-5"></div>
+          <div class="ai-node node-6"></div>
+          <div class="ai-node node-7"></div>
+          <div class="ai-node node-8"></div>
 
-    <canvas
-      id="neuralCanvas">
-    </canvas>
+        </div>
 
+        <div class="data-label label-1">
+          <span></span>
+          NEURAL NETWORK
+        </div>
 
-    <!-- AI SPHERE -->
-
-    <div class="ai-sphere">
-
-
-      <!-- Rotating rings -->
-
-      <div
-        class="sphere-ring sphere-ring-1">
-      </div>
-
-      <div
-        class="sphere-ring sphere-ring-2">
-      </div>
-
-      <div
-        class="sphere-ring sphere-ring-3">
-      </div>
-
-
-      <!-- Sphere core -->
-
-      <div class="sphere-core">
-
-        <span>
-          AI
-        </span>
-
-        <small>
-          ML
-        </small>
-
-      </div>
-
-
-      <!-- Neural nodes -->
-
-      <div class="ai-node node-1"></div>
-
-      <div class="ai-node node-2"></div>
-
-      <div class="ai-node node-3"></div>
-
-      <div class="ai-node node-4"></div>
-
-      <div class="ai-node node-5"></div>
-
-      <div class="ai-node node-6"></div>
-
-      <div class="ai-node node-7"></div>
-
-      <div class="ai-node node-8"></div>
-
-
-    </div>
-
-
-    <!-- =================================================
-         DATA LABELS
-         ================================================= -->
-
-    <div class="data-label label-1">
-
-      <span></span>
-
-      NEURAL NETWORK
-
-    </div>
-
-
-    <div class="data-label label-2">
-
-      <span></span>
-
-      MACHINE LEARNING
-
-    </div>
-
-
-    <div class="data-label label-3">
-
-      <span></span>
-
-      PREDICTION
-
-    </div>
-
-
-  </div>
-
-
-  <!-- =================================================
-       AMBIENT GLOW
-       ================================================= -->
-
-  <div
-    class="hero-glow hero-glow-1"
-    aria-hidden="true">
-  </div>
-
-  <div
-    class="hero-glow hero-glow-2"
-    aria-hidden="true">
-  </div>
-
-  <div
-    class="hero-glow hero-glow-3"
-    aria-hidden="true">
-  </div>
-
-
-  <!-- =================================================
-       ROTATING BACKGROUND RINGS
-       ================================================= -->
-
-  <div
-    class="hero-ring ring-1"
-    aria-hidden="true">
-  </div>
-
-  <div
-    class="hero-ring ring-2"
-    aria-hidden="true">
-  </div>
-
-  <div
-    class="hero-ring ring-3"
-    aria-hidden="true">
-  </div>
-
-
-  <!-- =================================================
-       SCAN LINE
-       ================================================= -->
-
-  <div
-    class="hero-scanline"
-    aria-hidden="true">
-  </div>
-
-
-  <!-- =================================================
-       HERO CONTENT
-       ================================================= -->
-
-  <div class="hero-content reveal">
-
-
-    <p class="eyebrow">
-
-      BSc IT • AI/ML • Full Stack
-
-    </p>
-
-
-    <!-- Cinematic title -->
-
-    <h1 class="hero-title">
-
-
-      <span class="title-line">
-
-        Building digital
-
-      </span>
-
-
-      <span class="title-line outline-line">
-
-        experiences
-
-      </span>
-
-
-      <span class="title-line">
-
-        that matter.
-
-      </span>
-
-
-    </h1>
-
-
-    <p class="hero-text">
-
-      Hi, I'm
-      <strong>
-        Mehul Vasava
-      </strong>
-
-      — an IT student and aspiring
-      developer focused on Machine Learning,
-      modern web development,
-      and practical software projects.
-
-    </p>
-
-
-    <!-- =================================================
-         QUICK STATS
-         ================================================= -->
-
-    <div class="quick-stats">
-
-
-      <div>
-
-        <strong>
-          BSc IT
-        </strong>
-
-        <small>
-          Student
-        </small>
-
-      </div>
-
-
-      <div>
-
-        <strong>
-          AI/ML
-        </strong>
-
-        <small>
-          Focus
-        </small>
-
-      </div>
-
-
-      <div>
-
-        <strong>
-          Web
-        </strong>
-
-        <small>
-          Development
-        </small>
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-  <!-- =================================================
-       EXISTING ORBIT
-       ================================================= -->
-
-  <div class="hero-orbit reveal">
-
-
-    <div class="orbit orbit1"></div>
-
-    <div class="orbit orbit2"></div>
-
-
-    <!-- Existing VM core -->
-
-    <div class="core">
-
-      <span>
-        VM
-      </span>
-
-    </div>
-
-
-    <!-- Floating cards -->
-
-    <div class="float-card c1">
-
-      Python
-
-      <b>
-        01
-      </b>
-
-    </div>
-
-
-    <div class="float-card c2">
-
-      Machine Learning
-
-      <b>
-        02
-      </b>
-
-    </div>
-
-
-    <div class="float-card c3">
-
-      Full Stack
-
-      <b>
-        03
-      </b>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- =================================================
-       SCROLL CUE
-       ================================================= -->
-
-  <div class="scroll-cue">
-
-    SCROLL
-
-    <span>
-      ↓
-    </span>
-
-  </div>
-
-
-</section>
-
-
-<!-- ===================================================
-     ABOUT
-     =================================================== -->
-
-<section
-  id="about"
-  class="section about"
->
-
-
-  <div class="section-head reveal">
-
-
-    <span>
-      01 / ABOUT
-    </span>
-
-
-    <h2>
-
-      Curious mind.<br>
-
-      <em>
-        Practical builder.
-      </em>
-
-    </h2>
-
-
-  </div>
-
-
-  <div class="about-grid">
-
-
-    <div class="about-copy reveal">
-
-
-      <p class="lead">
-
-        I enjoy turning ideas into clean,
-        useful, and visually engaging
-        digital products.
-
-      </p>
-
-
-      <p>
-
-        I'm pursuing BSc IT with a growing specialization
-        in Machine Learning, Data Science, Python,
-        and Full Stack Development.
-
-      </p>
-
-
-      <p>
-
-        My projects focus on solving real-world problems
-        while keeping the user experience simple and professional.
-
-      </p>
-
-
-      <p>
-
-        I'm continuously learning modern technologies,
-        improving my coding skills, and preparing for
-        opportunities where I can contribute, learn, and grow.
-
-      </p>
-
-
-    </div>
-
-
-    <div class="about-card reveal">
-
-
-      <div class="card-number">
-        01
-      </div>
-
-
-      <h3>
-        What I bring
-      </h3>
-
-
-      <ul>
-
-        <li>
-          Problem-solving mindset
-        </li>
-
-        <li>
-          Hands-on project experience
-        </li>
-
-        <li>
-          Clean & responsive UI
-        </li>
-
-        <li>
-          Data-driven thinking
-        </li>
-
-      </ul>
-
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
-
-<!-- ===================================================
-     SKILLS
-     =================================================== -->
-
-<section
-  id="skills"
-  class="section dark"
->
-
-
-  <div class="section-head reveal">
-
-
-    <span>
-      02 / SKILLS
-    </span>
-
-
-    <h2>
-
-      Tools I use to<br>
-
-      <em>
-        build & learn.
-      </em>
-
-    </h2>
-
-
-  </div>
-
-
-  <div class="skill-grid">
-
-
-    <article class="skill reveal">
-
-
-      <span>
-        01
-      </span>
-
-
-      <h3>
-        Programming
-      </h3>
-
-
-      <p>
-        Python · C · C++ · Java · JavaScript
-      </p>
-
-
-      <div class="meter">
-
-        <i style="--w:88%"></i>
-
-      </div>
-
-
-    </article>
-
-
-    <article class="skill reveal">
-
-
-      <span>
-        02
-      </span>
-
-
-      <h3>
-        Web Development
-      </h3>
-
-
-      <p>
-        HTML5 · CSS3 · JavaScript · Node.js · Responsive Design · APIs
-      </p>
-
-
-      <div class="meter">
-
-        <i style="--w:84%"></i>
-
-      </div>
-
-
-    </article>
-
-
-    <article class="skill reveal">
-
-
-      <span>
-        03
-      </span>
-
-
-      <h3>
-        AI / Machine Learning
-      </h3>
-
-
-      <p>
-        Data Handling · ML Algorithms · Python
-      </p>
-
-
-      <div class="meter">
-
-        <i style="--w:82%"></i>
-
-      </div>
-
-
-    </article>
-
-
-    <article class="skill reveal">
-
-
-      <span>
-        04
-      </span>
-
-
-      <h3>
-        Database
-      </h3>
-
-
-      <p>
-        SQL · PL/SQL · JDBC · Data Handling
-      </p>
-
-
-      <div class="meter">
-
-        <i style="--w:78%"></i>
-
-      </div>
-
-
-    </article>
-
-
-  </div>
-
-
-  <!-- Technology cloud -->
-
-  <div class="tech-cloud reveal">
-
-
-    <span>
-      Python
-    </span>
-
-    <span>
-      JavaScript
-    </span>
-
-    <span>
-      React
-    </span>
-
-    <span>
-      Node.js
-    </span>
-
-    <span>
-      MongoDB
-    </span>
-
-    <span>
-      SQL
-    </span>
-
-    <span>
-      Git
-    </span>
-
-    <span>
-      Scikit-learn
-    </span>
-
-
-  </div>
-
-
-</section>
-
-
-<!-- ===================================================
-     PROJECTS
-     =================================================== -->
-
-<section
-  id="projects"
-  class="section projects"
->
-
-
-  <div class="section-head reveal">
-
-
-    <span>
-      03 / PROJECTS
-    </span>
-
-
-    <h2>
-
-      Selected work &<br>
-
-      <em>
-        learning projects.
-      </em>
-
-    </h2>
-
-
-  </div>
-
-
-  <div class="project-list">
-
-
-    <article class="project reveal">
-
-
-      <div class="project-no">
-        01
-      </div>
-
-
-      <div>
-
-
-        <p class="tag">
+        <div class="data-label label-2">
+          <span></span>
           MACHINE LEARNING
+        </div>
+
+        <div class="data-label label-3">
+          <span></span>
+          PREDICTION
+        </div>
+
+      </div>
+
+
+      <!-- Hero Background Effects -->
+
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-glow hero-glow-3"></div>
+
+      <div class="hero-ring ring-1"></div>
+      <div class="hero-ring ring-2"></div>
+      <div class="hero-ring ring-3"></div>
+
+      <div class="hero-scanline"></div>
+
+
+      <!-- Hero Content -->
+
+      <div class="hero-content reveal">
+
+        <p class="eyebrow">
+          BSc IT • AI/ML • Full Stack
+        </p>
+
+        <h1 class="hero-title">
+
+          <span class="title-line">
+            Building digital
+          </span>
+
+          <span class="title-line outline-line">
+            experiences
+          </span>
+
+          <span class="title-line">
+            that matter.
+          </span>
+
+        </h1>
+
+        <p class="hero-text">
+
+          Hi, I'm <strong>Mehul Vasava</strong> —
+          an IT student and aspiring developer focused on
+          Machine Learning, modern web development,
+          and practical software projects.
+
         </p>
 
 
-        <h3>
-          Student Performance Prediction
-        </h3>
+        <div class="quick-stats">
 
+          <div>
+            <strong>BSc IT</strong>
+            <small>Student</small>
+          </div>
 
-        <p>
+          <div>
+            <strong>AI/ML</strong>
+            <small>Focus</small>
+          </div>
 
-          Predicting student performance using academic
-          and behavioral features with data preprocessing,
-          model training, and evaluation.
-
-        </p>
-
-
-        <div class="chips">
-
-          <span>
-            Python
-          </span>
-
-          <span>
-            Pandas
-          </span>
-
-          <span>
-            Scikit-learn
-          </span>
+          <div>
+            <strong>Web</strong>
+            <small>Development</small>
+          </div>
 
         </div>
 
 
+        <div class="hero-actions">
+
+          <a
+            href="#projects"
+            class="btn primary magnetic"
+          >
+            View Projects
+            <span>↗</span>
+          </a>
+
+          <a
+            href="#contact"
+            class="btn ghost magnetic"
+          >
+            Let's Connect
+            <span>→</span>
+          </a>
+
+        </div>
+
       </div>
 
 
-      <a
-        href="#contact"
-        class="arrow"
-        aria-label="Contact about Student Performance Prediction"
-      >
+      <!-- Hero Orbit -->
 
-        ↗
+      <div class="hero-orbit reveal">
 
-      </a>
+        <div class="orbit orbit1"></div>
+        <div class="orbit orbit2"></div>
 
+        <div class="core">
+          VM
+        </div>
 
-    </article>
+        <div class="float-card c1">
+          Python
+          <b>01</b>
+        </div>
 
+        <div class="float-card c2">
+          Machine Learning
+          <b>02</b>
+        </div>
 
-    <article class="project reveal">
+        <div class="float-card c3">
+          Full Stack
+          <b>03</b>
+        </div>
 
-
-      <div class="project-no">
-        02
       </div>
 
 
-      <div>
+      <div class="scroll-cue">
+        SCROLL <span>↓</span>
+      </div>
+
+    </section>
 
 
-        <p class="tag">
-          MACHINE LEARNING
-        </p>
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about" class="section about">
+
+      <div class="section-head reveal">
+
+        <span>01 / ABOUT</span>
+
+        <h2>
+          Curious mind.<br>
+          <em>Practical builder.</em>
+        </h2>
+
+      </div>
 
 
-        <h3>
-          Loan Approval Prediction
-        </h3>
+      <div class="about-grid">
 
+        <div class="about-copy reveal">
 
-        <p>
+          <p class="lead">
+            I enjoy turning ideas into clean, useful,
+            and visually engaging digital products.
+          </p>
 
-          A classification project that cleans applicant data,
-          handles missing values, encodes features, trains a model,
-          and predicts loan approval.
+          <p>
+            I'm pursuing BSc IT with a growing specialization
+            in Machine Learning, Data Science, Python,
+            and Full Stack Development.
+          </p>
 
-        </p>
+          <p>
+            My projects focus on solving real-world problems
+            while keeping the user experience simple and professional.
+          </p>
 
-
-        <div class="chips">
-
-          <span>
-            Python
-          </span>
-
-          <span>
-            ML
-          </span>
-
-          <span>
-            Flask
-          </span>
+          <p>
+            I'm continuously learning modern technologies,
+            improving my coding skills, and preparing for
+            opportunities where I can contribute, learn, and grow.
+          </p>
 
         </div>
 
 
+        <div class="about-card tilt reveal">
+
+          <div class="card-number">
+            01
+          </div>
+
+          <h3>
+            What I bring
+          </h3>
+
+          <ul>
+
+            <li>Problem-solving mindset</li>
+
+            <li>Hands-on project experience</li>
+
+            <li>Clean & responsive UI</li>
+
+            <li>Data-driven thinking</li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= SKILLS ================= -->
+
+    <section id="skills" class="section dark">
+
+      <div class="section-head reveal">
+
+        <span>02 / SKILLS</span>
+
+        <h2>
+          Tools I use to<br>
+          <em>build & learn.</em>
+        </h2>
+
       </div>
 
 
-      <a
-        href="#contact"
-        class="arrow"
-        aria-label="Contact about Loan Approval Prediction"
-      >
-
-        ↗
-
-      </a>
+      <div class="skill-grid">
 
 
-    </article>
+        <article class="skill tilt reveal">
+
+          <span>01</span>
+
+          <h3>
+            Programming
+          </h3>
+
+          <p>
+            Python · C · C++ · Java · JavaScript
+          </p>
+
+          <div class="meter">
+            <i data-width="88"></i>
+          </div>
+
+        </article>
 
 
-  </div>
+        <article class="skill tilt reveal">
+
+          <span>02</span>
+
+          <h3>
+            Web Development
+          </h3>
+
+          <p>
+            HTML5 · CSS3 · JavaScript · Node.js ·
+            Responsive Design · APIs
+          </p>
+
+          <div class="meter">
+            <i data-width="84"></i>
+          </div>
+
+        </article>
 
 
-</section>
+        <article class="skill tilt reveal">
+
+          <span>03</span>
+
+          <h3>
+            AI / Machine Learning
+          </h3>
+
+          <p>
+            Data Handling · ML Algorithms · Python
+          </p>
+
+          <div class="meter">
+            <i data-width="82"></i>
+          </div>
+
+        </article>
 
 
-<!-- ===================================================
-     EDUCATION
-     =================================================== -->
+        <article class="skill tilt reveal">
 
-<section
-  id="education"
-  class="section dark"
->
+          <span>04</span>
 
+          <h3>
+            Database
+          </h3>
 
-  <div class="section-head reveal">
+          <p>
+            SQL · PL/SQL · JDBC · Data Handling
+          </p>
 
+          <div class="meter">
+            <i data-width="78"></i>
+          </div>
 
-    <span>
-      04 / EDUCATION
-    </span>
+        </article>
 
-
-    <h2>
-
-      Learning today.<br>
-
-      <em>
-        Building tomorrow.
-      </em>
-
-    </h2>
+      </div>
 
 
-  </div>
+      <div class="tech-cloud reveal">
+
+        <span>Python</span>
+        <span>JavaScript</span>
+        <span>React</span>
+        <span>Node.js</span>
+        <span>MongoDB</span>
+        <span>SQL</span>
+        <span>Git</span>
+        <span>Scikit-learn</span>
+
+      </div>
+
+    </section>
 
 
-  <div class="timeline">
+    <!-- ================= PROJECTS ================= -->
+
+    <section id="projects" class="section projects">
+
+      <div class="section-head reveal">
+
+        <span>03 / PROJECTS</span>
+
+        <h2>
+          Selected work &<br>
+          <em>learning projects.</em>
+        </h2>
+
+      </div>
 
 
-    <div class="timeline-item reveal">
+      <div class="project-list">
 
 
-      <span>
-        Current
-      </span>
+        <article class="project tilt reveal">
+
+          <div class="project-no">
+            01
+          </div>
+
+          <div>
+
+            <p class="tag">
+              MACHINE LEARNING
+            </p>
+
+            <h3>
+              Student Performance Prediction
+            </h3>
+
+            <p>
+              Predicting student performance using academic
+              and behavioral features with data preprocessing,
+              model training, and evaluation.
+            </p>
+
+            <div class="chips">
+
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>Scikit-learn</span>
+
+            </div>
+
+          </div>
+
+          <a
+            href="#contact"
+            class="arrow"
+            aria-label="Contact about Student Performance Prediction"
+          >
+            ↗
+          </a>
+
+        </article>
 
 
-      <div>
+        <article class="project tilt reveal">
+
+          <div class="project-no">
+            02
+          </div>
+
+          <div>
+
+            <p class="tag">
+              MACHINE LEARNING
+            </p>
+
+            <h3>
+              Loan Approval Prediction
+            </h3>
+
+            <p>
+              A classification project that cleans applicant
+              data, handles missing values, encodes features,
+              trains a model, and predicts loan approval.
+            </p>
+
+            <div class="chips">
+
+              <span>Python</span>
+              <span>ML</span>
+              <span>Flask</span>
+
+            </div>
+
+          </div>
+
+          <a
+            href="#contact"
+            class="arrow"
+            aria-label="Contact about Loan Approval Prediction"
+          >
+            ↗
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
 
 
-        <h3>
-          Bachelor of Science in Information Technology
-        </h3>
+    <!-- ================= EDUCATION ================= -->
 
+    <section id="education" class="section dark">
+
+      <div class="section-head reveal">
+
+        <span>04 / EDUCATION</span>
+
+        <h2>
+          Learning today.<br>
+          <em>Building tomorrow.</em>
+        </h2>
+
+      </div>
+
+
+      <div class="timeline">
+
+
+        <div class="timeline-item reveal">
+
+          <span>
+            Current
+          </span>
+
+          <div>
+
+            <h3>
+              Bachelor of Science in Information Technology
+            </h3>
+
+            <p>
+              BSc IT · Focus areas: Programming,
+              Web Development, Databases,
+              Data Science & Machine Learning
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item reveal">
+
+          <span>
+            Learning
+          </span>
+
+          <div>
+
+            <h3>
+              AI / ML & Full Stack Development
+            </h3>
+
+            <p>
+              Hands-on practice through academic assignments,
+              personal projects, and continuous technology learning.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact" class="section contact">
+
+      <div class="contact-box reveal">
+
+        <p class="eyebrow">
+          05 / CONTACT
+        </p>
+
+        <h2>
+          Have an idea?<br>
+          <em>Let's build it.</em>
+        </h2>
 
         <p>
-
-          BSc IT · Focus areas: Programming,
-          Web Development, Databases,
-          Data Science & Machine Learning
-
+          I'm open to internships, projects,
+          collaborations, and learning opportunities.
+          Feel free to connect with me.
         </p>
 
 
+        <div class="social-icons">
+
+          <a
+            href="mailto:mv3453215@gmail.com"
+            aria-label="Email"
+          >
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/mehul-vasava-45ab40437"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+
+          <a
+            href="https://github.com/vm946"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a
+            href="https://www.instagram.com/v_m_119/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+        </div>
+
       </div>
 
-
-    </div>
-
-
-    <div class="timeline-item reveal">
-
-
-      <span>
-        Learning
-      </span>
-
-
-      <div>
-
-
-        <h3>
-          AI / ML & Full Stack Development
-        </h3>
-
-
-        <p>
-
-          Hands-on practice through academic assignments,
-          personal projects, and continuous technology learning.
-
-        </p>
-
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
-
-<!-- ===================================================
-     CONTACT
-     =================================================== -->
-
-<section
-  id="contact"
-  class="section contact"
->
-
-
-  <div class="contact-box reveal">
-
-
-    <p class="eyebrow">
-
-      05 / CONTACT
-
-    </p>
-
-
-    <h2>
-
-      Have an idea?<br>
-
-      <em>
-        Let's build it.
-      </em>
-
-    </h2>
-
-
-    <p>
-
-      I'm open to internships, projects,
-      collaborations, and learning opportunities.
-      Feel free to connect with me.
-
-    </p>
-
-
-    <!-- SOCIAL MEDIA -->
-
-    <div class="social-icons">
-
-
-      <!-- Email -->
-
-      <a
-        href="mailto:mv3453215@gmail.com"
-        aria-label="Email"
-        title="Email"
-      >
-
-        <i class="fa-solid fa-envelope"></i>
-
-      </a>
-
-
-      <!-- LinkedIn -->
-
-      <a
-        href="https://www.linkedin.com/in/mehul-vasava-45ab40437"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        title="LinkedIn"
-      >
-
-        <i class="fa-brands fa-linkedin-in"></i>
-
-      </a>
-
-
-      <!-- GitHub -->
-
-      <a
-        href="https://github.com/vm946"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        title="GitHub"
-      >
-
-        <i class="fa-brands fa-github"></i>
-
-      </a>
-
-
-      <!-- Instagram -->
-
-      <a
-        href="https://www.instagram.com/v_m_119/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-        title="Instagram"
-      >
-
-        <i class="fa-brands fa-instagram"></i>
-
-      </a>
-
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
+    </section>
 
   </main>
 
 
+  <!-- Visitor Counter -->
+
   <div class="visitor-counter">
-
-
-👁️ Visitors:
-
-
-<span id="visitorCount">
-
-  Loading...
-
-</span>
-
-
+    👁️ Visitors:
+    <span id="visitorCount">Loading...</span>
   </div>
 
 
   <footer>
-
-<span>
-
-  © 2026 VM
-
-</span>
-
-
+    © 2026 VM
   </footer>
 
- 
-  <script>
-
-
-    const visitorCount =
-      document.getElementById(
-        "visitorCount"
-      );
-
-
-    fetch(
-      "https://countapi.mileshilliard.com/api/v1/hit/mehulvasava-portfolio-visits"
-    )
-
-
-      .then(
-        response => {
-
-          if (!response.ok) {
-
-            throw new Error(
-              "Failed to fetch visitor count"
-            );
-
-          }
-
-
-          return response.json();
-
-        }
-      )
-
-
-      .then(
-        data => {
-
-          visitorCount.textContent =
-            data.value ?? "—";
-
-        }
-      )
-
-
-      .catch(
-        error => {
-
-          console.error(
-            "Visitor counter error:",
-            error
-          );
-
-
-          visitorCount.textContent =
-            "—";
-
-        }
-      );
-
-
-  </script>
 
   <script src="script.js"></script>
 
 </body>
-
 </html>
