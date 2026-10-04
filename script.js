@@ -1059,3 +1059,207 @@
 
 
 })();
+/* =====================================================
+   LUXURY SCROLL ANIMATION
+===================================================== */
+
+const luxuryHome =
+  document.querySelector(".luxury-home");
+
+const luxuryTitle =
+  document.querySelector(".luxury-title");
+
+const luxuryObject =
+  document.querySelector(".luxury-object");
+
+const luxuryIntro =
+  document.querySelector(".luxury-intro");
+
+if (
+  luxuryHome &&
+  !window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+) {
+
+  let ticking = false;
+
+  function luxuryScrollAnimation() {
+
+    const scroll =
+      window.scrollY;
+
+    const homeHeight =
+      luxuryHome.offsetHeight;
+
+    const progress =
+      Math.min(
+        scroll / homeHeight,
+        1
+      );
+
+    /*
+      Title moves upward
+    */
+
+    if (luxuryTitle) {
+
+      luxuryTitle.style.transform =
+        `translate3d(
+          0,
+          ${progress * -100}px,
+          0
+        )`;
+
+      luxuryTitle.style.opacity =
+        `${1 - progress * .65}`;
+
+    }
+
+
+    /*
+      3D object moves slower
+    */
+
+    if (luxuryObject) {
+
+      luxuryObject.style.transform =
+        `translate3d(
+          0,
+          calc(-45% + ${progress * 80}px),
+          0
+        )
+        rotateY(${progress * 12}deg)`;
+
+    }
+
+
+    /*
+      Intro moves slightly
+    */
+
+    if (luxuryIntro) {
+
+      luxuryIntro.style.transform =
+        `translateX(
+          ${progress * -50}px
+        )`;
+
+      luxuryIntro.style.opacity =
+        `${1 - progress}`;
+
+    }
+
+
+    ticking = false;
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      if (!ticking) {
+
+        requestAnimationFrame(
+          luxuryScrollAnimation
+        );
+
+        ticking = true;
+
+      }
+
+    },
+    { passive: true }
+  );
+
+}
+
+
+/* =====================================================
+   LUXURY MOUSE PARALLAX
+===================================================== */
+
+if (
+  luxuryHome &&
+  !window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches
+) {
+
+  luxuryHome.addEventListener(
+    "mousemove",
+    event => {
+
+      const x =
+        event.clientX /
+        window.innerWidth -
+        .5;
+
+      const y =
+        event.clientY /
+        window.innerHeight -
+        .5;
+
+
+      if (luxuryObject) {
+
+        luxuryObject.style.marginLeft =
+          `${x * 15}px`;
+
+        luxuryObject.style.marginTop =
+          `${y * 15}px`;
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   MAGNETIC LUXURY BUTTONS
+===================================================== */
+
+document
+  .querySelectorAll(".luxury-button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "mousemove",
+      event => {
+
+        const rect =
+          button.getBoundingClientRect();
+
+        const x =
+          event.clientX -
+          rect.left -
+          rect.width / 2;
+
+        const y =
+          event.clientY -
+          rect.top -
+          rect.height / 2;
+
+        button.style.transform =
+          `translate(
+            ${x * .12}px,
+            ${y * .12}px
+          )`;
+
+      }
+    );
+
+    button.addEventListener(
+      "mouseleave",
+      () => {
+
+        button.style.transform = "";
+
+      }
+    );
+
+  });
